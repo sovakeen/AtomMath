@@ -1,0 +1,42 @@
+#definition_form {
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#definition_form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+}
+
+.form-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.preview-toggle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#preview {
+    width: 49%;
+    display: none;
+    vertical-align: top;
+}
+
+/* When preview is shown */
+body.show-preview #definition_form {
+    width: 50%;
+}
+
+body.show-preview #preview {
+    display: inline-block;
+}
+
+span .katex {
+    font-size: medium;
+}

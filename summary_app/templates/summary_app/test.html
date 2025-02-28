@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+        
+        <!-- Stylesheets -->
+        <link rel="shortcut icon" type="image/png" href="{% static 'summary_app/images/favicon.png' %}" >
+        <link rel="stylesheet" href="{% static 'summary_app/css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'summary_app/css/term_form.css' %}">
+        
+        <!-- Katex files -->
+        <link rel="stylesheet" href="{% static 'summary_app/katex/katex.min.css' %}">
+        <script src="{% static 'summary_app/katex/katex.min.js' %}"></script>
+        <script src="{% static 'summary_app/katex/contrib/auto-render.min.js' %}"></script>
+    </head>
+    <body>
+        <!-- Header -->
+        <p id="page_header"><b id="page_name">Test page</b></p>
+
+        <!-- Raw sql execution form -->
+        <form action="{% url 'summary_app:execute_raw_sql' %}" method="post">
+            {% csrf_token %}
+
+            <label for="sql field">Term name:</label><br>
+            <textarea class="name input" name="sql_query" id="sql field" wrap="off" placeholder="Enter sql query">select id, name from summary_app_term</textarea><br>
+            <input type="submit" value="Execute">
+        </form><br>
+        <div style="border: 2px solid red">
+            <b>Execution result:</b><br>
+            <b>{{ result }}</b><br><br>
+            <b>x for x in result:</b>
+            <ul style="margin: 0;">
+                {% if result %}
+                    {% for x in result %}
+                        <li><b>{{ x.name }}</b></li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </div><br>
+        
+        <!-- Navigation -->
+        <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
+    </body>
+    <script>
+        // document.getElementById("b").onclick = function () { alert(`Now: ${history.state}`); };
+    </script>
+</html>

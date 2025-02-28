@@ -1,0 +1,25 @@
+.input {
+    resize: both; 
+    overflow: scroll;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.id {
+    width: 100px; 
+    height: 32px;
+    /* 32 for 1 line + scrollbar */
+}
+
+.name {
+    width: 500px; 
+    height: 47px;
+    /* 47 for 2 lines + scrollbar */
+}
+
+.definition {
+    width: 100%;
+    height: 285px; 
+}

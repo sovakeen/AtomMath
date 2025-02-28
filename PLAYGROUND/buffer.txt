@@ -1,0 +1,44 @@
+:root {
+    --offset: 18px;
+}
+
+body {
+    margin: var(--offset);
+}
+
+ul {
+    margin-top: var(--offset); 
+    margin-bottom: var(--offset);
+}
+
+/* br {
+    line-height: 10px;
+} */
+
+#page_header {
+    background-color: red;
+    margin-top: 2*var(--offset); 
+    margin-bottom: 2*var(--offset);
+}
+
+#page_name {
+    font-size: large;
+    border: 1px solid;
+    border-left: 0px;
+    padding: var(--offset) var(--offset) var(--offset) 0;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+/* For accessibiity test */
+
+/* p {
+    background-color: red;
+}
+
+ul {
+    background-color: green;
+} */

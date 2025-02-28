@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+        
+        <!-- Stylesheets -->
+        <link rel="shortcut icon" type="image/png" href="{% static 'summary_app/images/favicon.png' %}" >
+        <link rel="stylesheet" href="{% static 'summary_app/css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'summary_app/css/term_form.css' %}">
+
+        <!-- Custom keys behaviour -->
+        <script src="{% static 'summary_app/js/custom-keys.js' %}"></script>
+    </head>
+    <body>
+        <!-- Header -->
+        <p id="page_header"><b id="page_name">Adding term</b></p>
+        
+        <!-- Possible error message -->
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+        <!-- Main adding form -->
+        <form id="form" action="{% url 'summary_app:add_term' %}" method="post">
+            {% csrf_token %}
+
+            <!-- "Name" field -->
+            <label for="name field">Term name:</label><br>
+            <textarea class="name input" id="name field" name="term_name" wrap="off" placeholder="Enter term name"></textarea><br>
+            <br>
+
+            <!-- "Type" selection control -->
+            <label for="type field">Term type:</label><br>
+            <select id="type field" name="term_type">
+                {% for type in term_types %}
+                    <option value="{{ type }}">{{ type }}</option>
+                {% endfor %}
+            </select><br>
+            <br>
+
+            <!-- "Definition" field -->
+            <label for="definition field">Term definition:</label><br>
+            <textarea class="definition input custom-keys" id="definition field" name="term_definition" wrap="off" placeholder="Enter term definition"></textarea><br>
+            <br>
+            <input type="submit" value="Add term">
+        </form><br>
+
+        <!-- Navigation -->
+        <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
+    </body>
+    <script>
+        window.onload = function () {
+            document.getElementById("form").reset()
+        };
+    </script>
+</html>
