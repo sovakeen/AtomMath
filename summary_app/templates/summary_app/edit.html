@@ -22,56 +22,60 @@
     </head>
     <body>
         <!-- Header -->
-        <p id="page_header"><b id="page_name">Editing term {{ term.id }}</b></p>
+        <div id="header">
+            <a href="{% url 'summary_app:index' %}"><b id="page_name">Editing term {{ term.id }}</b></a><br>
+        </div>
 
-        <!-- Main editing form -->
-        <form action="{% url 'summary_app:modify_term' term.id %}" method="post">
-            {% csrf_token %}
+        <div id="content">
+            <!-- Main editing form -->
+            <form action="{% url 'summary_app:modify_term' term.id %}" method="post">
+                {% csrf_token %}
 
-            <!-- "ID" field -->
-            <label for="id field">Term id:</label><br>
-            <textarea class="id input" id="id field" name="term_id" wrap="off" placeholder="Enter term id">{{ term.id }}</textarea><br>
-            <br>
+                <!-- "ID" field -->
+                <label for="id field">Term id:</label><br>
+                <textarea class="id input" id="id field" name="term_id" wrap="off" placeholder="Enter term id">{{ term.id }}</textarea><br>
+                <br>
 
-            <!-- "Name" field -->
-            <label for="name field">Term name:</label><br>
-            <textarea class="name input" id="name field" name="term_name" wrap="off" placeholder="Enter term name">{{ term.name }}</textarea><br>
-            <br>
+                <!-- "Name" field -->
+                <label for="name field">Term name:</label><br>
+                <textarea class="name input" id="name field" name="term_name" wrap="off" placeholder="Enter term name">{{ term.name }}</textarea><br>
+                <br>
 
-            <!-- "Type" selection control -->
-            <label for="type field">Term type:</label><br>
-            <select id="type field" name="term_type">
-                {% for type in term_types %}
-                    {% if term.type == type %}
-                        <option value="{{ type }}" selected>{{ type }}</option>
-                    {% else %}
-                        <option value="{{ type }}">{{ type }}</option>
-                    {% endif %}
-                {% endfor %}
-            </select><br>
-            <br>
+                <!-- "Type" selection control -->
+                <label for="type field">Term type:</label><br>
+                <select id="type field" name="term_type">
+                    {% for type in term_types %}
+                        {% if term.type == type %}
+                            <option value="{{ type }}" selected>{{ type }}</option>
+                        {% else %}
+                            <option value="{{ type }}">{{ type }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select><br>
+                <br>
 
-            <!-- "Definition" field -->
-            <div id="definition_form">
-                <label for="definition field">Term definition (
-                    <input type="checkbox" id="show_preview" unchecked>
-                    <label for="show_preview">show preview</label>
-                ):</label><br>
-                <textarea style="white-space: pre-wrap;" class="definition input custom-keys" id="definition field" name="term_definition" wrap="off" placeholder="Enter term definition">{{ term.definition }}</textarea><br>
-            </div>
+                <!-- "Definition" field -->
+                <div id="definition_form">
+                    <label for="definition field">Term definition (
+                        <input type="checkbox" id="show_preview" unchecked>
+                        <label for="show_preview">show preview</label>
+                    ):</label><br>
+                    <textarea style="white-space: pre-wrap;" class="definition input custom-keys" id="definition field" name="term_definition" wrap="off" placeholder="Enter term definition">{{ term.definition }}</textarea><br>
+                </div>
+                
+                <!-- Preview -->
+                <div id="preview">
+                    <text>Term definition preview:</text><br>
+                    <span>{{ term.definition|linebreaksbr }}</span>
+                </div>
+
+                <input type="submit" value="Save changes" onclick="return confirm('Are you sure you want to save changes?')">
+            </form><br>
             
-            <!-- Preview -->
-            <div id="preview">
-                <text>Term definition preview:</text><br>
-                <span>{{ term.definition|linebreaksbr }}</span>
-            </div>
-
-            <input type="submit" value="Save changes" onclick="return confirm('Are you sure you want to save changes?')">
-        </form><br>
-        
-        <!-- Navigation -->
-        <a href="{% url 'summary_app:read' term.id %}"><button>Cancel</button></a>
-        <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
+            <!-- Navigation -->
+            <a href="{% url 'summary_app:read' term.id %}"><button>Cancel</button></a>
+            <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
+        </div>
     </body>
     <script>
         

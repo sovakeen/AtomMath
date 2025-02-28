@@ -19,7 +19,9 @@
     </head>
     <body>
         <!-- Header -->
-        <p id="page_header"><b id="page_name">Terms overview</b></p>
+        <div id="header">
+            <a href="{% url 'summary_app:index' %}"><b id="page_name">Terms overview</b></a><br>
+        </div>
 
         <!-- Search bar -->
         <!-- <div id="search_container">
@@ -27,27 +29,29 @@
             <div id="search_results" class="search-popup"></div>
         </div> -->
 
-        <!-- Terms list -->
-        {% if terms_list %}
-            <ul style="list-style-type:none; padding:0;">
-            {% for term in terms_list %}
-                {% if term.type == 'Section' %}
-                    <li class="section"><a class="section_name" href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}">{{ term.name }}</a></li>
-                {% else %}
-                    <li><a href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}">{{ term.name }}</a></li>
-                {% endif %}
-            {% endfor %}
-            </ul>
-        {% else %}
-            <p>No terms yet.</p>
-        {% endif %}
-        
-        <!-- Navigation (Action buttons) -->
-        <a href="{% url 'summary_app:add' %}"><button>Add term</button></a>
-        <a href="{% url 'summary_app:delete_all' %}" onclick="return confirm('Are you sure you want to delete ALL terms? This action cannot be undone.')"><button>Delete all</button></a>
-        <a href="{% url 'summary_app:prepopulate' %}"><button>Prepopulate</button></a>
-        <a href="{% url 'summary_app:send_backup' %}"><button>Send backup</button></a>
-        <a href="{% url 'summary_app:test' %}"><button>Test</button></a>
+        <div id="content">
+            <!-- Terms list -->
+            {% if terms_list %}
+                <ul style="list-style-type:none; padding:0;">
+                {% for term in terms_list %}
+                    {% if term.type == 'Section' %}
+                        <li class="section"><a class="section_name" href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}">{{ term.name }}</a></li>
+                    {% else %}
+                        <li><a href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}">{{ term.name }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No terms yet.</p>
+            {% endif %}
+            
+            <!-- Navigation (Action buttons) -->
+            <a href="{% url 'summary_app:add' %}"><button>Add term</button></a>
+            <a href="{% url 'summary_app:delete_all' %}" onclick="return confirm('Are you sure you want to delete ALL terms? This action cannot be undone.')"><button>Delete all</button></a>
+            <a href="{% url 'summary_app:prepopulate' %}"><button>Prepopulate</button></a>
+            <a href="{% url 'summary_app:send_backup' %}"><button>Send backup</button></a>
+            <a href="{% url 'summary_app:test' %}"><button>Test</button></a>
+        </div>
     </body>
     <script>
         renderMathInElement(document.body, {

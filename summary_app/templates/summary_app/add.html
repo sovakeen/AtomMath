@@ -13,38 +13,42 @@
     </head>
     <body>
         <!-- Header -->
-        <p id="page_header"><b id="page_name">Adding term</b></p>
+        <div id="header">
+            <a href="{% url 'summary_app:index' %}"><b id="page_name">Adding term</b></a><br>
+        </div>
         
-        <!-- Possible error message -->
-        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        <div id="content">
+            <!-- Possible error message -->
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-        <!-- Main adding form -->
-        <form id="form" action="{% url 'summary_app:add_term' %}" method="post">
-            {% csrf_token %}
+            <!-- Main adding form -->
+            <form id="form" action="{% url 'summary_app:add_term' %}" method="post">
+                {% csrf_token %}
 
-            <!-- "Name" field -->
-            <label for="name field">Term name:</label><br>
-            <textarea class="name input" id="name field" name="term_name" wrap="off" placeholder="Enter term name"></textarea><br>
-            <br>
+                <!-- "Name" field -->
+                <label for="name field">Term name:</label><br>
+                <textarea class="name input" id="name field" name="term_name" wrap="off" placeholder="Enter term name"></textarea><br>
+                <br>
 
-            <!-- "Type" selection control -->
-            <label for="type field">Term type:</label><br>
-            <select id="type field" name="term_type">
-                {% for type in term_types %}
-                    <option value="{{ type }}">{{ type }}</option>
-                {% endfor %}
-            </select><br>
-            <br>
+                <!-- "Type" selection control -->
+                <label for="type field">Term type:</label><br>
+                <select id="type field" name="term_type">
+                    {% for type in term_types %}
+                        <option value="{{ type }}">{{ type }}</option>
+                    {% endfor %}
+                </select><br>
+                <br>
 
-            <!-- "Definition" field -->
-            <label for="definition field">Term definition:</label><br>
-            <textarea class="definition input custom-keys" id="definition field" name="term_definition" wrap="off" placeholder="Enter term definition"></textarea><br>
-            <br>
-            <input type="submit" value="Add term">
-        </form><br>
+                <!-- "Definition" field -->
+                <label for="definition field">Term definition:</label><br>
+                <textarea class="definition input custom-keys" id="definition field" name="term_definition" wrap="off" placeholder="Enter term definition"></textarea><br>
+                <br>
+                <input type="submit" value="Add term">
+            </form><br>
 
-        <!-- Navigation -->
-        <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
+            <!-- Navigation -->
+            <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
+        </div>
     </body>
     <script>
         window.onload = function () {

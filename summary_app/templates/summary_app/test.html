@@ -15,31 +15,35 @@
     </head>
     <body>
         <!-- Header -->
-        <p id="page_header"><b id="page_name">Test page</b></p>
+        <div id="header">
+            <a href="{% url 'summary_app:index' %}"><b id="page_name">Test page</b></a><br>
+        </div>
 
-        <!-- Raw sql execution form -->
-        <form action="{% url 'summary_app:execute_raw_sql' %}" method="post">
-            {% csrf_token %}
+        <div id="content">
+            <!-- Raw sql execution form -->
+            <form action="{% url 'summary_app:execute_raw_sql' %}" method="post">
+                {% csrf_token %}
 
-            <label for="sql field">Term name:</label><br>
-            <textarea class="name input" name="sql_query" id="sql field" wrap="off" placeholder="Enter sql query">select id, name from summary_app_term</textarea><br>
-            <input type="submit" value="Execute">
-        </form><br>
-        <div style="border: 2px solid red">
-            <b>Execution result:</b><br>
-            <b>{{ result }}</b><br><br>
-            <b>x for x in result:</b>
-            <ul style="margin: 0;">
-                {% if result %}
-                    {% for x in result %}
-                        <li><b>{{ x.name }}</b></li>
-                    {% endfor %}
-                {% endif %}
-            </ul>
-        </div><br>
-        
-        <!-- Navigation -->
-        <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
+                <label for="sql field">Term name:</label><br>
+                <textarea class="name input" name="sql_query" id="sql field" wrap="off" placeholder="Enter sql query">select id, name from summary_app_term</textarea><br>
+                <input type="submit" value="Execute">
+            </form><br>
+            <div style="border: 2px solid red">
+                <b>Execution result:</b><br>
+                <b>{{ result }}</b><br><br>
+                <b>x for x in result:</b>
+                <ul style="margin: 0;">
+                    {% if result %}
+                        {% for x in result %}
+                            <li><b>{{ x.name }}</b></li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div><br>
+            
+            <!-- Navigation -->
+            <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
+        </div>
     </body>
     <script>
         // document.getElementById("b").onclick = function () { alert(`Now: ${history.state}`); };

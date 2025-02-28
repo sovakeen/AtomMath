@@ -2,24 +2,34 @@
     --small_offset: 9px;
     --offset: 18px;
     --header_offset: 27px;
+    --header_height: calc(20.8px + 2 * var(--offset));
 }
 
 body {
-    margin: var(--offset);
-}
-
-#page_header {
-    margin-top: var(--header_offset); 
-    margin-bottom: var(--header_offset);
-    margin-right: var(--header_offset);
+    margin: 0;
 }
 
 #page_name {
+    display: inline-block;
+    margin: var(--offset);
     font-size: large;
-    border: 1px solid;
-    border-left: 0px;
-    /* border-top: 0px; */
-    padding: var(--small_offset) var(--small_offset) var(--small_offset) 0;
+    /* 18+9+20.8+9+18=74.8 */
+}
+
+#header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    background-color: white;
+    z-index: 1000;
+}
+
+#content {
+    margin-top: calc(var(--header_height) + var(--offset));
+    margin-left: var(--offset);
+    margin-bottom: var(--offset);
+    z-index: 1;
 }
 
 a {
