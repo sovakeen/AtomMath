@@ -34,7 +34,7 @@ function handleTextareaKeyPress(event) {
 // Apply the key handling to specific textareas
 document.addEventListener('DOMContentLoaded', function() {
     // Add the class 'custom-keys' to any textarea you want to have this behavior
-    const textareas = document.querySelectorAll('textarea.custom-keys');
+    const textareas = document.querySelectorAll('textarea.custom_keys');
     textareas.forEach(textarea => {
         textarea.addEventListener('keydown', handleTextareaKeyPress);
     });

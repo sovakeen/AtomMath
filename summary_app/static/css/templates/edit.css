@@ -1,3 +1,7 @@
+span .katex {
+    font-size: medium;
+}
+
 #definition_form {
     width: 100%;
     display: inline-block;
@@ -10,18 +14,6 @@
     display: block;
 }
 
-.form-controls {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.preview-toggle {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
 #preview {
     width: 49%;
     display: none;
@@ -29,14 +21,10 @@
 }
 
 /* When preview is shown */
-body.show-preview #definition_form {
+.show_preview #definition_form {
     width: 50%;
 }
 
-body.show-preview #preview {
+.show_preview #preview {
     display: inline-block;
-}
-
-span .katex {
-    font-size: medium;
 }

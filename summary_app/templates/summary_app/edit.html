@@ -3,47 +3,46 @@
     <head>
         {% load static %}
         
-        <!-- Stylesheets -->
-        <link rel="shortcut icon" type="image/png" href="{% static 'summary_app/images/favicon.png' %}" >
-        <link rel="stylesheet" href="{% static 'summary_app/css/base.css' %}">
-        <link rel="stylesheet" href="{% static 'summary_app/css/term_form.css' %}">
-        <link rel="stylesheet" href="{% static 'summary_app/css/edit.css' %}">
+        <!-- CSS -->
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'css/templates/edit.css' %}">
+        <link rel="stylesheet" href="{% static 'css/term_form.css' %}">
 
-        <!-- Katex files -->
-        <link rel="stylesheet" href="{% static 'summary_app/katex/katex.min.css' %}">
-        <script src="{% static 'summary_app/katex/katex.min.js' %}"></script>
-        <script src="{% static 'summary_app/katex/contrib/auto-render.min.js' %}"></script>
+        <!-- katex -->
+        <link rel="stylesheet" href="{% static 'katex/katex.min.css' %}">
+        <script src="{% static 'katex/katex.min.js' %}"></script>
+        <script src="{% static 'katex/contrib/auto-render.min.js' %}"></script>
 
-        <!-- Custom keys behaviour -->
-        <script src="{% static 'summary_app/js/custom-keys.js' %}"></script>
+        <!-- custom keys behaviour -->
+        <script src="{% static 'js/custom_keys.js' %}" defer></script>
 
-        <!-- Definition render review -->
-        <script src="{% static 'summary_app/js/preview.js' %}"></script>
+        <!-- definition render preview -->
+        <script src="{% static 'js/preview.js' %}" defer></script>
     </head>
     <body>
-        <!-- Header -->
         <div id="header">
-            <a href="{% url 'summary_app:index' %}"><b id="page_name">Editing term {{ term.id }}</b></a><br>
+            <a href="{% url 'summary_app:index' %}"><b id="page_name">Editing term {{ term.id }}</b></a>
+            <br>
         </div>
 
         <div id="content">
-            <!-- Main editing form -->
             <form action="{% url 'summary_app:modify_term' term.id %}" method="post">
                 {% csrf_token %}
 
-                <!-- "ID" field -->
-                <label for="id field">Term id:</label><br>
-                <textarea class="id input" id="id field" name="term_id" wrap="off" placeholder="Enter term id">{{ term.id }}</textarea><br>
+                <!-- "id" field -->
+                <label for="id_field">Term id:</label><br>
+                <textarea id="id_field" class="input id" name="term_id" wrap="off" placeholder="Enter term id">{{ term.id }}</textarea><br>
                 <br>
 
-                <!-- "Name" field -->
-                <label for="name field">Term name:</label><br>
-                <textarea class="name input" id="name field" name="term_name" wrap="off" placeholder="Enter term name">{{ term.name }}</textarea><br>
+                <!-- "name" field -->
+                <label for="name_field">Term name:</label><br>
+                <textarea id="name_field" class="formatted input name" name="term_name" wrap="off" placeholder="Enter term name">{{ term.name }}</textarea><br>
                 <br>
 
-                <!-- "Type" selection control -->
-                <label for="type field">Term type:</label><br>
-                <select id="type field" name="term_type">
+                <!-- "type" selection control -->
+                <label for="type_field">Term type:</label><br>
+                <select id="type_field" name="term_type">
                     {% for type in term_types %}
                         {% if term.type == type %}
                             <option value="{{ type }}" selected>{{ type }}</option>
@@ -54,25 +53,25 @@
                 </select><br>
                 <br>
 
-                <!-- "Definition" field -->
+                <!-- "definition" field -->
                 <div id="definition_form">
-                    <label for="definition field">Term definition (
-                        <input type="checkbox" id="show_preview" unchecked>
-                        <label for="show_preview">show preview</label>
-                    ):</label><br>
-                    <textarea style="white-space: pre-wrap;" class="definition input custom-keys" id="definition field" name="term_definition" wrap="off" placeholder="Enter term definition">{{ term.definition }}</textarea><br>
+                    <label for="definition_field">Term definition (<input id="preview_checkbox" type="checkbox" unchecked>show preview):</label>
+                    <br>
+                    <textarea id="definition_field" class="formatted input definition custom_keys"name="term_definition" wrap="off" placeholder="Enter term definition">{{ term.definition }}</textarea>
+                    <br>
                 </div>
                 
-                <!-- Preview -->
+                <!-- preview -->
                 <div id="preview">
-                    <text>Term definition preview:</text><br>
-                    <span>{{ term.definition|linebreaksbr }}</span>
+                    <text>Term definition preview:</text>
+                    <br>
+                    <span class="formatted">{{ term.definition|linebreaksbr }}</span>
                 </div>
 
                 <input type="submit" value="Save changes" onclick="return confirm('Are you sure you want to save changes?')">
-            </form><br>
+            </form>
+            <br>
             
-            <!-- Navigation -->
             <a href="{% url 'summary_app:read' term.id %}"><button>Cancel</button></a>
             <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
         </div>

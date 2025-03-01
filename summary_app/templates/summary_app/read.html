@@ -4,31 +4,33 @@
         {% load static %}
         {% load summary_filters %}
         
-        <!-- Stylesheets -->
-        <link rel="shortcut icon" type="image/png" href="{% static 'summary_app/images/favicon.png' %}" >
-        <link rel="stylesheet" href="{% static 'summary_app/css/base.css' %}">
-        <link rel="stylesheet" href="{% static 'summary_app/css/read.css' %}">
+        <!-- CSS -->
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'css/templates/read.css' %}">
 
-        <!-- Katex files -->
-        <link rel="stylesheet" href="{% static 'summary_app/katex/katex.min.css' %}">
-        <script src="{% static 'summary_app/katex/katex.min.js' %}"></script>
-        <script src="{% static 'summary_app/katex/contrib/auto-render.min.js' %}"></script>
+        <!-- katex -->
+        <link rel="stylesheet" href="{% static 'katex/katex.min.css' %}">
+        <script src="{% static 'katex/katex.min.js' %}"></script>
+        <script src="{% static 'katex/contrib/auto-render.min.js' %}"></script>
+        <script src="{% static 'js/render_katex.js' %}" defer></script>
     </head>
     <body>
-        <!-- Header -->
         <div id="header">
-            <a href="{% url 'summary_app:index' %}"><b id="page_name">Reading term {{ term.id }}</b></a><br>
+            <a href="{% url 'summary_app:index' %}"><b id="page_name">Reading term {{ term.id }}</b></a>
+            <br>
         </div>
-
-        <!-- Main text block containing term info to read -->
+        
         <div id="content">
             <div>
                 <b>Term name:</b><br>
-                <span>{{ term.name }}</span><br>
+                <span class="formatted">&#9{{ term.name }}</span>
+                <br><br>
+                <b>Term definition:</b>
                 <br>
-                <b>Term definition:</b><br>
-                <div style="white-space: pre-wrap;">{{ term.definition|linebreaksbr|link_terms:term.id }}</div>
-            </div><br>
+                <div class="formatted">{{ term.definition|linebreaksbr|link_terms:term.id }}</div>
+            </div>
+            <br>
 
             {% if prev or next %}
                 {% if prev %}
@@ -46,12 +48,6 @@
         </div>
     </body>
     <script>
-        renderMathInElement(document.body, {
-            delimiters: [
-                {left: '$$', right: '$$', display: true},
-                {left: '$', right: '$', display: false}
-            ],
-            throwOnError: false
-        });
+        
     </script>
 </html>

@@ -66,8 +66,8 @@ def modify_term(request, term_id):
     entered_id = request.POST['term_id']
     if str(term_id) == entered_id or not Term.objects.filter(pk=entered_id).exists():
         term.pk = entered_id
+        Term.objects.filter(pk=term_id).delete()
         term.save()
-        Term.objects.delete(pk=term_id)
         return HttpResponseRedirect(reverse("summary_app:read", args=(entered_id,)))
     else:
         return redirect(reverse("summary_app:edit", args=[term_id]) + "?error=id_exists")

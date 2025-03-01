@@ -28,6 +28,7 @@ body {
 #content {
     margin-top: calc(var(--header_height) + var(--offset));
     margin-left: var(--offset);
+    margin-right: var(--offset);
     margin-bottom: var(--offset);
     z-index: 1;
 }
@@ -35,6 +36,11 @@ body {
 a {
     color: black;
     text-decoration: none;
+}
+
+.formatted {
+    white-space: pre-wrap;
+    tab-size: 4;
 }
 
 /* br {

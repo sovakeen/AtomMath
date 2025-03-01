@@ -1,6 +1,6 @@
 // Function to render math in preview
 function renderPreview() {
-    const definitionText = document.getElementById("definition field").value;
+    const definitionText = document.getElementById("definition_field").value;
     const previewSpan = document.querySelector("#preview span");
     previewSpan.innerHTML = definitionText.replace(/\n/g, '<br>');
     renderMathInElement(document.getElementById("preview"), {
@@ -14,13 +14,13 @@ function renderPreview() {
 
 // Function to toggle preview visibility
 function togglePreview() {
-    const isChecked = document.getElementById("show_preview").checked;
-    document.body.classList.toggle("show-preview", isChecked);
+    const isChecked = document.getElementById("preview_checkbox").checked;
+    document.getElementById("content").classList.toggle("show_preview", isChecked);
 }
 
 // Add event listeners
-document.getElementById("definition field").addEventListener('input', renderPreview);
-document.getElementById("show_preview").addEventListener('change', togglePreview);
+document.getElementById("definition_field").addEventListener('input', renderPreview);
+document.getElementById("preview_checkbox").addEventListener('change', togglePreview);
 
 // Initial setup
 renderPreview();
