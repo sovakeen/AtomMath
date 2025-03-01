@@ -3,34 +3,56 @@
     <head>
         {% load static %}
         
-        <!-- Stylesheets -->
-        <link rel="shortcut icon" type="image/png" href="{% static 'summary_app/images/favicon.png' %}" >
-        <link rel="stylesheet" href="{% static 'summary_app/css/base.css' %}">
-        <link rel="stylesheet" href="{% static 'summary_app/css/term_form.css' %}">
+        <!-- CSS -->
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'css/term_form.css' %}">
+        <link rel="stylesheet" href="{% static 'css/popup.css' %}">
         
-        <!-- Katex files -->
-        <link rel="stylesheet" href="{% static 'summary_app/katex/katex.min.css' %}">
-        <script src="{% static 'summary_app/katex/katex.min.js' %}"></script>
-        <script src="{% static 'summary_app/katex/contrib/auto-render.min.js' %}"></script>
+        <!-- katex -->
+        <link rel="stylesheet" href="{% static 'katex/katex.min.css' %}">
+        <script src="{% static 'katex/katex.min.js' %}"></script>
+        <script src="{% static 'katex/contrib/auto-render.min.js' %}"></script>
+
+        <!-- popup -->
+        <script src="{% static 'js/popup.js' %}" defer></script>
     </head>
     <body>
-        <!-- Header -->
         <div id="header">
-            <a href="{% url 'summary_app:index' %}"><b id="page_name">Test page</b></a><br>
+            <a href="{% url 'summary_app:index' %}"><b id="page_name">Test page</b></a>
+
+            <div class="popup_container">
+                <div class="clickable_element" onclick="togglePopupMenu(event)">
+                    Click me to show popup
+                </div>
+
+                <div id="popup_menu" class="popup_menu">
+                    <ul>
+                        <li>Option 1 with long text</li>
+                        <li>Short Option</li>
+                        <li>Another Option</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <div id="content">
-            <!-- Raw sql execution form -->
+            <!-- raw sql execution form -->
             <form action="{% url 'summary_app:execute_raw_sql' %}" method="post">
                 {% csrf_token %}
 
-                <label for="sql field">Term name:</label><br>
-                <textarea class="name input" name="sql_query" id="sql field" wrap="off" placeholder="Enter sql query">select id, name from summary_app_term</textarea><br>
+                <label for="sql_field">Raw sql:</label>
+                <br>
+                <textarea id="sql_field" class="input name" name="sql_query" wrap="off" placeholder="Enter sql query">select id, name from summary_app_term</textarea>
+                <br><br>
                 <input type="submit" value="Execute">
-            </form><br>
-            <div style="border: 2px solid red">
-                <b>Execution result:</b><br>
-                <b>{{ result }}</b><br><br>
+            </form>
+            <br>
+            <div style="border: 1px solid red">
+                <b>Execution result:</b>
+                <br>
+                <b>{{ result }}</b>
+                <br><br>
                 <b>x for x in result:</b>
                 <ul style="margin: 0;">
                     {% if result %}
@@ -42,7 +64,6 @@
             </div>
             <br>
             
-            <!-- Navigation -->
             <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
         </div>
     </body>
