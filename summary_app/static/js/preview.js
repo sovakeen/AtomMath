@@ -19,7 +19,7 @@ function togglePreview() {
 }
 
 // Add event listeners
-document.getElementById("definition_field").addEventListener('input', renderPreview);
+document.getElementById("definition_field").addEventListener('keyup', renderPreview);
 document.getElementById("preview_checkbox").addEventListener('change', togglePreview);
 
 // Initial setup

@@ -39,9 +39,20 @@ a {
     text-decoration: none;
 }
 
+span .katex {
+    font-size: medium;
+}
+
 .formatted {
-    white-space: pre-wrap;
+    white-space: pre;
     tab-size: 4;
+}
+
+button.nav {
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* br {

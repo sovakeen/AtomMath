@@ -34,13 +34,13 @@
 
             {% if prev or next %}
                 {% if prev %}
-                    <a href="{% url 'summary_app:read' prev.id %}"><button>Prev: {{ prev.name }}</button></a>
+                    <a href="{% url 'summary_app:read' prev.id %}"><button class="nav">Prev: {{ prev.name }}</button></a>
                 {% endif %}
                 {% if next %}
-                    <a href="{% url 'summary_app:read' next.id %}"><button>Next: {{ next.name }}</button></a>
-                {% endif %}   
+                    <a href="{% url 'summary_app:read' next.id %}"><button class="nav">Next: {{ next.name }}</button></a>
+                {% endif %}
                 <br><br>
-            {% endif %}
+            {% endif %} 
 
             <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
             <a href="{% url 'summary_app:edit' term.id %}"><button>Edit</button></a>

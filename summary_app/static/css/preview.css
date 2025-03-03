@@ -1,0 +1,14 @@
+#preview {
+    width: 49%;
+    display: none;
+    vertical-align: top;
+}
+
+/* When preview is shown */
+.show_preview #definition_div {
+    width: 50%;
+}
+
+.show_preview #preview {
+    display: inline-block;
+}

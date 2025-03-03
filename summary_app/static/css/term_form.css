@@ -1,9 +1,10 @@
-.input {
+textarea {
     resize: both; 
     overflow: scroll;
+    word-wrap: normal;
 }
 
-.input:focus {
+textarea:focus {
     outline: none;
 }
 
@@ -19,7 +20,15 @@
     /* 47 for 2 lines + scrollbar */
 }
 
-.definition {
+#definition_div {
     width: 100%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#definition_div textarea {
     height: 285px; 
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
 }

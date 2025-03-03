@@ -6,8 +6,9 @@
         <!-- CSS -->
         <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
-        <link rel="stylesheet" href="{% static 'css/templates/edit.css' %}">
+        <link rel="stylesheet" href="{% static 'css/preview.css' %}">
         <link rel="stylesheet" href="{% static 'css/term_form.css' %}">
+        <link rel="stylesheet" href="{% static 'css/popup.css' %}">
 
         <!-- katex -->
         <link rel="stylesheet" href="{% static 'katex/katex.min.css' %}">
@@ -19,11 +20,18 @@
 
         <!-- definition render preview -->
         <script src="{% static 'js/preview.js' %}" defer></script>
+
+        <!-- popup -->
+        <script src="{% static 'js/popup.js' %}" defer></script>
     </head>
     <body>
         <div id="header">
             <a href="{% url 'summary_app:index' %}"><b id="page_name">Editing term {{ term.id }}</b></a>
-            <br>
+            
+            <div class="popup_container">
+                <div class="clickable_element"><b>K</b></div>
+                <div id="popup_menu" class="popup_menu"><ul></ul></div>
+            </div>
         </div>
 
         <div id="content">
@@ -32,12 +40,12 @@
 
                 <!-- "id" field -->
                 <label for="id_field">Term id:</label><br>
-                <textarea id="id_field" class="input id" name="term_id" wrap="off" placeholder="Enter term id">{{ term.id }}</textarea><br>
+                <textarea id="id_field" class="id" name="term_id" wrap="off" placeholder="Enter term id">{{ term.id }}</textarea><br>
                 <br>
 
                 <!-- "name" field -->
                 <label for="name_field">Term name:</label><br>
-                <textarea id="name_field" class="formatted input name" name="term_name" wrap="off" placeholder="Enter term name">{{ term.name }}</textarea><br>
+                <textarea id="name_field" class="formatted name" name="term_name" wrap="off" placeholder="Enter term name">{{ term.name }}</textarea><br>
                 <br>
 
                 <!-- "type" selection control -->
@@ -54,10 +62,10 @@
                 <br>
 
                 <!-- "definition" field -->
-                <div id="definition_form">
+                <div id="definition_div">
                     <label for="definition_field">Term definition (<input id="preview_checkbox" type="checkbox" unchecked>show preview):</label>
                     <br>
-                    <textarea id="definition_field" class="formatted input definition custom_keys"name="term_definition" wrap="off" placeholder="Enter term definition">{{ term.definition }}</textarea>
+                    <textarea id="definition_field" class="formatted custom_keys" name="term_definition" wrap="off" placeholder="Enter term definition">{{ term.definition }}</textarea>
                     <br>
                 </div>
                 
@@ -68,7 +76,8 @@
                     <span class="formatted">{{ term.definition|linebreaksbr }}</span>
                 </div>
 
-                <input type="submit" value="Save changes" onclick="return confirm('Are you sure you want to save changes?')">
+                <input type="submit" value="Save changes">
+                <!-- onclick="return confirm('Are you sure you want to save changes?')" -->
             </form>
             <br>
             
