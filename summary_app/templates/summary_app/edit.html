@@ -21,8 +21,8 @@
         <!-- definition render preview -->
         <script src="{% static 'js/preview.js' %}" defer></script>
 
-        <!-- popup -->
-        <script src="{% static 'js/popup.js' %}" defer></script>
+        <!-- katex popup -->
+        <script src="{% static 'js/katex_popup.js' %}" defer></script>
     </head>
     <body>
         <div id="header">
@@ -30,7 +30,7 @@
             
             <div class="popup_container">
                 <div class="clickable_element"><b>K</b></div>
-                <div id="popup_menu" class="popup_menu"><ul></ul></div>
+                <div id="katex_popup" class="popup_menu"><ul></ul></div>
             </div>
         </div>
 
@@ -45,7 +45,7 @@
 
                 <!-- "name" field -->
                 <label for="name_field">Term name:</label><br>
-                <textarea id="name_field" class="formatted name" name="term_name" wrap="off" placeholder="Enter term name">{{ term.name }}</textarea><br>
+                <textarea id="name_field" class="pre name" name="term_name" wrap="off" placeholder="Enter term name">{{ term.name }}</textarea><br>
                 <br>
 
                 <!-- "type" selection control -->
@@ -65,7 +65,7 @@
                 <div id="definition_div">
                     <label for="definition_field">Term definition (<input id="preview_checkbox" type="checkbox" unchecked>show preview):</label>
                     <br>
-                    <textarea id="definition_field" class="formatted custom_keys" name="term_definition" wrap="off" placeholder="Enter term definition">{{ term.definition }}</textarea>
+                    <textarea id="definition_field" class="pre custom_keys" name="term_definition" wrap="off" placeholder="Enter term definition">{{ term.definition }}</textarea>
                     <br>
                 </div>
                 
@@ -73,8 +73,9 @@
                 <div id="preview">
                     <text>Term definition preview:</text>
                     <br>
-                    <span class="formatted">{{ term.definition|linebreaksbr }}</span>
+                    <span id="preview_text" class="pre">{{ term.definition|linebreaksbr }}</span>
                 </div>
+                <br>
 
                 <input type="submit" value="Save changes">
                 <!-- onclick="return confirm('Are you sure you want to save changes?')" -->

@@ -36,7 +36,16 @@
                     {% if term.type == 'Section' %}
                         <li class="section"><a class="section_name" href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}">{{ term.name }}</a></li>
                     {% else %}
-                        <li><a href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}">{{ term.name }}</a></li>
+                        <li>
+                            <!-- <u>
+                                {% for full, short in shorts.items %}
+                                    {% if term.type == full %}
+                                        {{ short }}
+                                    {% endif %}
+                                {% endfor %}
+                            </u>
+                            <text> </text> -->
+                        <a href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}">{{ term.name }}</a></li>
                     {% endif %}
                 {% endfor %}
                 </ul>
@@ -46,7 +55,6 @@
             
             <a href="{% url 'summary_app:add' %}"><button>Add term</button></a>
             <a href="{% url 'summary_app:delete_all' %}" onclick="return confirm('Are you sure you want to delete ALL terms? This action cannot be undone.')"><button>Delete all</button></a>
-            <a href="{% url 'summary_app:prepopulate' %}"><button>Prepopulate</button></a>
             <a href="{% url 'summary_app:send_backup' %}"><button>Send backup</button></a>
             <a href="{% url 'summary_app:test' %}"><button>Test</button></a>
         </div>

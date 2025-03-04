@@ -10,11 +10,8 @@ from .models import Term
 
 def index(request):
     term_list = Term.objects.order_by("id")
-    return render(request, "summary_app/index.html", { "terms_list": term_list })
-
-
-def test(request, data={}):
-    return render(request, "summary_app/test.html", { "result": data })
+    shorts = {"Term": "Def", "Theorem": "The", "Article": "Art", "Undefined": "Und", "Example": "Exp"}
+    return render(request, "summary_app/index.html", { "terms_list": term_list, "shorts": shorts })
 
 
 def add(request):
@@ -33,6 +30,10 @@ def edit(request, term_id):
     return render(request, "summary_app/edit.html", { "term": term, "term_types": Term.Type.labels })
 
 
+def test(request, data={}):
+    return render(request, "summary_app/test.html", { "result": data })
+
+
 #   Functions listed below are not actually views representing pages but request processors
 
 
@@ -44,18 +45,7 @@ def add_term(request):
     else:
         term.save()
         return redirect("summary_app:add")
-
-
-def delete_all(request):
-    Term.objects.all().delete()
-    return redirect("summary_app:index")
-
-
-def delete_term(request, term_id):
-    term = get_object_or_404(Term, pk=term_id)
-    term.delete()
-    return redirect("summary_app:index")
-
+    
 
 # why redirect is not working (mb problem with args form)?
 def modify_term(request, term_id):
@@ -73,16 +63,14 @@ def modify_term(request, term_id):
         return redirect(reverse("summary_app:edit", args=[term_id]) + "?error=id_exists")
 
 
-# to deprecate (prepopulate from some file)
-def prepopulate(request):
-    Term(name="Def 1.3 \"$\\sigma$-алгебра (сигма-алгебра)\"", definition="$\\sigma$-алгеброй (сигма-алгеброй) называется алгебра $\\mathscr{A}$ такая, что $A_n \\in \\mathscr{A} ~ \\forall ~ n \\in N \\Rightarrow \\bigcup_{n=1}^{\\infty} A_n \\in \\mathscr{A}$.").save()
-    Term(name="Def 1.7 \"Произведение (пересечение) событий $A$ и $B$\"", definition='Произведением (пересечение) событий $A$ и $B$ называется событие, обозначаемое $A \\cap B$ или $A B$, которое происходит тогда и только тогда, когда одновременно происходят события $A$ и $B$.').save()
-    Term(name="Глава 1 Дубль 1", definition="smth", type=Term.Type.SECTION).save()
-    Term(name=r'Def 1.8 "Несовместные события"', definition=r'События $A$ и $B$ назовём несовместными, если $A \cap B=\varnothing$ (т. е. вместе произойти они не могут).').save()
-    Term(name=r'Def 1.9 "Сумма (объединение) событий $A$ и $B$"', definition=r'Суммой (объединением) событий $A$ и $B$ назовём событие, обозначаемое $A \cup B$ или $A+B$ (в случае, когда они несовместны), которое происходит тогда и только тогда, когда происходят $A$ или $B$, или оба вместе.').save()
-    Term(name=r'Def 1.10 "Разность событий $A$ и $B$"', definition=r'Разностью событий $A$ и $B$ назовём событие $A \backslash B$, происходящее тогда и только тогда, когда произошло $A$, но не произошло $B$.').save()
-    Term(name="Test term 1", definition="$\\int_{-\\infty}^\\infty\\xi\\,e^{2 \\pi i \\xi x}\\,d\\xi$").save()
-    Term(name="Test term 2", definition="$$\\int_{-\\infty}^\\infty\\xi\\,e^{2 \\pi i \\xi x}\\,d\\xi$$").save()
+def delete_all(request):
+    Term.objects.all().delete()
+    return redirect("summary_app:index")
+
+
+def delete_term(request, term_id):
+    term = get_object_or_404(Term, pk=term_id)
+    term.delete()
     return redirect("summary_app:index")
 
 
@@ -105,4 +93,4 @@ def send_backup(request):
     )
     email.attach_file(Path(__file__).parent.parent.absolute().joinpath('db.sqlite3'))
     email.send(fail_silently=False)
-    return redirect("summary_app:test")
+    return redirect("summary_app:index")

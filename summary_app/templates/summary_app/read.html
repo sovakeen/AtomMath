@@ -22,14 +22,12 @@
         </div>
         
         <div id="content">
-            <div>
-                <b>Term name:</b><br>
-                <span class="formatted">&#9{{ term.name }}</span>
-                <br><br>
-                <b>Term definition:</b>
-                <br>
-                <div class="formatted">{{ term.definition|linebreaksbr|link_terms:term.id }}</div>
-            </div>
+            <b>Term name:</b><br>
+            <span class="pre">&#9{{ term.name }}</span>
+            <br><br>
+            <b>Term definition:</b>
+            <br>
+            <div class="prewrap">{{ term.definition|linebreaksbr|link_terms:term.id }}</div>
             <br>
 
             {% if prev or next %}

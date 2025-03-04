@@ -43,17 +43,14 @@ span .katex {
     font-size: medium;
 }
 
-.formatted {
+.pre {
     white-space: pre;
-    tab-size: 4;
 }
 
-button.nav {
-    max-width: 300px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.prewrap {
+    white-space: pre-wrap;
 }
+
 
 /* br {
     line-height: 10px;

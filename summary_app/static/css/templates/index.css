@@ -11,6 +11,10 @@ ul {
     list-style-type: none;
 }
 
+text {
+    white-space: pre;
+}
+
 .section {
     margin: var(--offset) 0 var(--offset) 0;
 }

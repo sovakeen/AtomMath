@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const clickableElement = document.querySelector('.clickable_element');
-    const popupMenu = document.getElementById('popup_menu');
+    const popupMenu = document.getElementById('katex_popup');
     const popupList = popupMenu.querySelector('ul');
 
     // Ensure elements exist
