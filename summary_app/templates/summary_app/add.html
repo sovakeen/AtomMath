@@ -3,50 +3,80 @@
     <head>
         {% load static %}
         
-        <!-- Stylesheets -->
-        <link rel="shortcut icon" type="image/png" href="{% static 'summary_app/images/favicon.png' %}" >
-        <link rel="stylesheet" href="{% static 'summary_app/css/base.css' %}">
-        <link rel="stylesheet" href="{% static 'summary_app/css/term_form.css' %}">
+        <!-- CSS -->
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'css/preview.css' %}">
+        <link rel="stylesheet" href="{% static 'css/term_form.css' %}">
+        <link rel="stylesheet" href="{% static 'css/popup.css' %}">
 
-        <!-- Custom keys behaviour -->
-        <script src="{% static 'summary_app/js/custom-keys.js' %}"></script>
+        <!-- katex -->
+        <link rel="stylesheet" href="{% static 'katex/katex.min.css' %}">
+        <script src="{% static 'katex/katex.min.js' %}"></script>
+        <script src="{% static 'katex/contrib/auto-render.min.js' %}"></script>
+
+        <!-- definition render preview -->
+        <script src="{% static 'js/preview.js' %}" defer></script>
+
+        <!-- custom keys behaviour -->
+        <script src="{% static 'js/custom_keys.js' %}" defer></script>
+
+        <!-- katex popup -->
+        <script src="{% static 'js/katex_popup.js' %}" defer></script>
     </head>
     <body>
-        <!-- Header -->
-        <p id="page_header"><b id="page_name">Adding term</b></p>
+        <div id="header">
+            <a href="{% url 'summary_app:index' %}"><b id="page_name">Adding term</b></a>
+            
+            <div class="popup_container">
+                <div class="clickable_element"><b>K</b></div>
+                <div id="katex_popup" class="popup_menu"><ul></ul></div>
+            </div>
+        </div>
         
-        <!-- Possible error message -->
-        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        <div id="content">
+            <form id="form" action="{% url 'summary_app:add_term' %}" method="post">
+                {% csrf_token %}
 
-        <!-- Main adding form -->
-        <form id="form" action="{% url 'summary_app:add_term' %}" method="post">
-            {% csrf_token %}
+                <!-- "name" field -->
+                <label for="name_field">Term name:</label><br>
+                <textarea id="name_field" class="pre name" name="term_name" wrap="off" placeholder="Enter term name"></textarea><br>
+                <br>
 
-            <!-- "Name" field -->
-            <label for="name field">Term name:</label><br>
-            <textarea class="name input" id="name field" name="term_name" wrap="off" placeholder="Enter term name"></textarea><br>
-            <br>
+                <!-- "type" selection control -->
+                <label for="type_field">Term type:</label><br>
+                <select id="type_field" name="term_type">
+                    {% for type in term_types %}
+                        <option value="{{ type }}">{{ type }}</option>
+                    {% endfor %}
+                </select><br>
+                <br>
 
-            <!-- "Type" selection control -->
-            <label for="type field">Term type:</label><br>
-            <select id="type field" name="term_type">
-                {% for type in term_types %}
-                    <option value="{{ type }}">{{ type }}</option>
-                {% endfor %}
-            </select><br>
-            <br>
+                <!-- "definition" field -->
+                <div id="definition_div">
+                    <label for="definition_field">Term definition: (<input id="preview_checkbox" type="checkbox" unchecked>show preview):</label>
+                    <br>
+                    <textarea id="definition_field" class="pre custom_keys" name="term_definition" wrap="off" placeholder="Enter term definition"></textarea>
+                    <br>
+                </div>
 
-            <!-- "Definition" field -->
-            <label for="definition field">Term definition:</label><br>
-            <textarea class="definition input custom-keys" id="definition field" name="term_definition" wrap="off" placeholder="Enter term definition"></textarea><br>
-            <br>
-            <input type="submit" value="Add term">
-        </form><br>
+                <!-- preview -->
+                <div id="preview">
+                    <text>Term definition preview:</text>
+                    <br>
+                    <!-- pre or prewrap? -->
+                    <span id="preview_text" class="prewrap">{{ term.definition|linebreaksbr }}</span>
+                </div>
 
-        <!-- Navigation -->
-        <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
+                <input type="submit" value="Add term">
+            </form>
+        </div>
+        <div id="footer">
+            <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
+        </div>
     </body>
     <script>
+        // clear filled forms on page refresh
         window.onload = function () {
             document.getElementById("form").reset()
         };

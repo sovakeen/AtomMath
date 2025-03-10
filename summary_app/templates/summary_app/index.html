@@ -3,59 +3,65 @@
     <head>
         {% load static %}
         
-        <!-- Stylesheets -->
-        <link rel="shortcut icon" type="image/png" href="{% static 'summary_app/images/favicon.png' %}" >
-        <link rel="stylesheet" href="{% static 'summary_app/css/base.css' %}">
-        <link rel="stylesheet" href="{% static 'summary_app/css/index.css' %}">
-        <link rel="stylesheet" href="{% static 'summary_app/css/search.css' %}">
+        <!-- CSS -->
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'css/templates/index.css' %}">
+        <link rel="stylesheet" href="{% static 'css/search.css' %}">
 
-        <!-- Katex files -->
-        <link rel="stylesheet" href="{% static 'summary_app/katex/katex.min.css' %}">
-        <script src="{% static 'summary_app/katex/katex.min.js' %}"></script>
-        <script src="{% static 'summary_app/katex/contrib/auto-render.min.js' %}"></script>
+        <!-- katex -->
+        <link rel="stylesheet" href="{% static 'katex/katex.min.css' %}">
+        <script src="{% static 'katex/katex.min.js' %}"></script>
+        <script src="{% static 'katex/contrib/auto-render.min.js' %}"></script>
+        <script src="{% static 'js/render_katex.js' %}" defer></script>
 
-        <!-- Search -->
-        <!-- <script src="{% static 'summary_app/js/search.js' %}"></script> -->
+        <!-- search -->
+        <!-- <script src="{% static 'js/search.js' %}"></script> -->
     </head>
     <body>
-        <!-- Header -->
-        <p id="page_header"><b id="page_name">Terms overview</b></p>
+        <div id="header">
+            <a href="{% url 'summary_app:index' %}"><b id="page_name">Terms overview</b></a><br>
+        </div>
 
-        <!-- Search bar -->
+        <!-- search bar -->
         <!-- <div id="search_container">
             <input type="text" id="search_input" placeholder="Search terms...">
             <div id="search_results" class="search-popup"></div>
         </div> -->
 
-        <!-- Terms list -->
-        {% if terms_list %}
-            <ul style="list-style-type:none; padding:0;">
-            {% for term in terms_list %}
-                {% if term.type == 'Section' %}
-                    <li class="section"><a class="section_name" href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}">{{ term.name }}</a></li>
-                {% else %}
-                    <li><a href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}">{{ term.name }}</a></li>
-                {% endif %}
-            {% endfor %}
-            </ul>
-        {% else %}
-            <p>No terms yet.</p>
-        {% endif %}
-        
-        <!-- Navigation (Action buttons) -->
-        <a href="{% url 'summary_app:add' %}"><button>Add term</button></a>
-        <a href="{% url 'summary_app:delete_all' %}" onclick="return confirm('Are you sure you want to delete ALL terms? This action cannot be undone.')"><button>Delete all</button></a>
-        <a href="{% url 'summary_app:prepopulate' %}"><button>Prepopulate</button></a>
-        <a href="{% url 'summary_app:send_backup' %}"><button>Send backup</button></a>
-        <a href="{% url 'summary_app:test' %}"><button>Test</button></a>
+        <div id="content">
+            {% if terms_list %}
+                <ul>
+                {% for term in terms_list %}
+                    {% if term.type == 'Section' %}
+                        <li class="section"><a class="section_name" href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}">{{ term.name }}</a></li>
+                    {% else %}
+                        <li>
+                            <!-- <u>
+                                {% for full, short in shorts.items %}
+                                    {% if term.type == full %}
+                                        {{ short }}
+                                    {% endif %}
+                                {% endfor %}
+                            </u>
+                            <text> </text> -->
+                        <a href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}">{{ term.name }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            {% else %}
+                <span>No terms yet.</span>
+            {% endif %}
+        </div>
+        <div id="footer">
+            <a href="{% url 'summary_app:add' %}"><button>Add term</button></a>
+            <a href="{% url 'summary_app:delete_all' %}" onclick="return confirm('Are you sure you want to delete ALL terms? This action cannot be undone.')"><button>Delete all</button></a>
+            <a href="{% url 'summary_app:send_backup' %}"><button>Send backup</button></a>
+            <a href="{% url 'summary_app:test' %}"><button><i>Test</i></button></a>
+            <a href="{% url 'summary_app:prepopulate' %}"><button><i>Prepopulate</i></button></a>
+        </div>
     </body>
     <script>
-        renderMathInElement(document.body, {
-            delimiters: [
-                {left: '$$', right: '$$', display: true},
-                {left: '$', right: '$', display: false}
-            ],
-            throwOnError: false
-        });
+
     </script>
 </html>

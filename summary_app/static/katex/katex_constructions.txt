@@ -1,0 +1,90 @@
+# Set Theory Symbols
+\subset
+\supset
+\in
+\notin
+\cap
+\cup
+\emptyset
+
+# Logical Symbols
+\forall
+\exists
+\neg
+\wedge
+\vee
+\implies
+\iff
+
+# Mathematical Operators
+\sum_{i=1}^{n}
+\prod_{i=1}^{n}
+\lim_{x \to \infty}
+\int_{a}^{b}
+\frac{a}{b}
+\sqrt{x}
+
+# Arrows
+\rightarrow
+\leftarrow
+\Rightarrow
+\Leftarrow
+\iff
+\xrightarrow{}
+\xleftarrow{}
+
+# Greek Letters
+\alpha
+\beta
+\gamma
+\delta
+\epsilon
+\zeta
+\eta
+\theta
+\lambda
+\mu
+\pi
+\sigma
+\omega
+
+# Relational Operators
+\leq
+\geq
+\neq
+\approx
+\equiv
+
+# Miscellaneous Symbols
+\infty
+\partial
+\nabla
+\clubsuit
+\diamondsuit
+\heartsuit
+\spadesuit
+
+# Calculus Symbols
+\frac{d}{dx}
+\nabla
+\Delta
+\partial
+
+# Matrix and Vector Notation
+\begin{pmatrix} a & b \\ c & d \end{pmatrix}
+\vec{v}
+\hat{x}
+
+# Trigonometric Functions
+\sin
+\cos
+\tan
+\cot
+\arcsin
+\arccos
+
+# Exponential and Logarithmic
+\exp
+\ln
+\log
+\lg

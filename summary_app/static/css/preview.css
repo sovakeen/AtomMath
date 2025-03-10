@@ -1,0 +1,25 @@
+#preview {
+    width: 49%;
+    display: none;
+    vertical-align: top;
+
+    
+}
+
+#preview_text {
+    width: 100%;
+    height: 270px;
+    display: inline-block;
+
+    resize: both; 
+    overflow: scroll;
+}
+
+/* When preview is shown */
+.show_preview #definition_div {
+    width: 50%;
+}
+
+.show_preview #preview {
+    display: inline-block;
+}

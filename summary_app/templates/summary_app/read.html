@@ -4,50 +4,47 @@
         {% load static %}
         {% load summary_filters %}
         
-        <!-- Stylesheets -->
-        <link rel="shortcut icon" type="image/png" href="{% static 'summary_app/images/favicon.png' %}" >
-        <link rel="stylesheet" href="{% static 'summary_app/css/base.css' %}">
-        <link rel="stylesheet" href="{% static 'summary_app/css/read.css' %}">
+        <!-- CSS -->
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'css/templates/read.css' %}">
 
-        <!-- Katex files -->
-        <link rel="stylesheet" href="{% static 'summary_app/katex/katex.min.css' %}">
-        <script src="{% static 'summary_app/katex/katex.min.js' %}"></script>
-        <script src="{% static 'summary_app/katex/contrib/auto-render.min.js' %}"></script>
+        <!-- katex -->
+        <link rel="stylesheet" href="{% static 'katex/katex.min.css' %}">
+        <script src="{% static 'katex/katex.min.js' %}"></script>
+        <script src="{% static 'katex/contrib/auto-render.min.js' %}"></script>
+        <script src="{% static 'js/render_katex.js' %}" defer></script>
     </head>
     <body>
-        <!-- Header -->
-        <p id="page_header"><b id="page_name">Reading term {{ term.id }}</b></p>
-
-        <!-- Main text block containing term info to read -->
-        <div>
+        <div id="header">
+            <a href="{% url 'summary_app:index' %}"><b id="page_name">Reading term {{ term.id }}</b></a>
+            <div id="nav_section">
+                {% if prev or next %}
+                {% if prev %}
+                    <a id="prev" class="nav" href="{% url 'summary_app:read' prev.id %}"><button>Prev: {{ prev.name }}</button></a>
+                {% endif %}
+                {% if next %}
+                    <a id="next" class="nav" href="{% url 'summary_app:read' next.id %}"><button>Next: {{ next.name }}</button></a>
+                {% endif %}
+            {% endif %} 
+            </div>
+        </div>
+        
+        <div id="content">
             <b>Term name:</b><br>
-            <span>{{ term.name }}</span><br>
-            <br>
-            <b>Term definition:</b><br>
-            <div style="white-space: pre-wrap;">{{ term.definition|linebreaksbr|link_terms:term.id }}</div>
-        </div><br>
-
-        {% if prev or next %}
-            {% if prev %}
-                <a href="{% url 'summary_app:read' prev.id %}"><button>Prev: {{ prev.name }}</button></a>
-            {% endif %}
-            {% if next %}
-                <a href="{% url 'summary_app:read' next.id %}"><button>Next: {{ next.name }}</button></a>
-            {% endif %}   
+            <span class="pre">&#9{{ term.name }}</span>
             <br><br>
-        {% endif %}
-
-        <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
-        <a href="{% url 'summary_app:edit' term.id %}"><button>Edit</button></a>
-        <a href="{% url 'summary_app:delete_term' term.id %}" onclick="return confirm('Are you sure you want to delete this term?')"><button>Delete</button></a>
+            <b>Term definition:</b>
+            <br>
+            <div class="prewrap">{{ term.definition|linebreaksbr|link_terms:term.id }}</div>
+        </div>
+        <div id="footer">
+            <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
+            <a href="{% url 'summary_app:edit' term.id %}"><button>Edit</button></a>
+            <a href="{% url 'summary_app:delete_term' term.id %}" onclick="return confirm('Are you sure you want to delete this term?')"><button>Delete</button></a>
+        </div>
     </body>
     <script>
-        renderMathInElement(document.body, {
-            delimiters: [
-                {left: '$$', right: '$$', display: true},
-                {left: '$', right: '$', display: false}
-            ],
-            throwOnError: false
-        });
+        
     </script>
 </html>
