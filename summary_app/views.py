@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.core.mail import EmailMessage
 from datetime import datetime
 from pathlib import Path
+import csv
 
 from .models import Term
 
@@ -93,4 +94,18 @@ def send_backup(request):
     )
     email.attach_file(Path(__file__).parent.parent.absolute().joinpath('db.sqlite3'))
     email.send(fail_silently=False)
+    return redirect("summary_app:index")
+
+
+def prepopulate(request):
+    Term.objects.all().delete()
+    with open(Path(__file__).parent.parent.absolute().joinpath('sample_data.csv'), 'r', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            Term.objects.create(
+                id=row['id'],
+                name=row['name'],
+                definition=row['definition'],
+                type=row['type']
+            )
     return redirect("summary_app:index")

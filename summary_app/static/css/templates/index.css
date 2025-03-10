@@ -5,8 +5,7 @@
 }
 
 ul {
-    margin-top: var(--offset); 
-    margin-bottom: var(--offset);
+    margin: 0;
     padding: 0;
     list-style-type: none;
 }

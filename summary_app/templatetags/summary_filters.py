@@ -19,6 +19,8 @@ def link_terms(value, current_term_id=None):
     # For each term, replace its occurrences with a link
     for term in terms:
         term_name = term.name
+        if term_name == '':
+            continue
         link = f'<a style="background-color: cyan;" href="{reverse("summary_app:read", args=[term.id])}">{term_name}</a>'
         # Case-insensitive replacement
         value = value.replace(term_name.lower(), link.lower())

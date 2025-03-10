@@ -16,5 +16,6 @@ urlpatterns = [
     path("delete_term/<int:term_id>/", views.delete_term, name="delete_term"),
     path("modify_term/<int:term_id>/", views.modify_term, name="modify_term"),
     path("execute_raw_sql/", views.execute_raw_sql, name="execute_raw_sql"),
-    path("send_backup/", views.send_backup, name="send_backup")
+    path("send_backup/", views.send_backup, name="send_backup"),
+    path("prepopulate/", views.prepopulate, name="prepopulate")
 ]

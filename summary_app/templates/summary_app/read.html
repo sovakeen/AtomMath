@@ -18,7 +18,16 @@
     <body>
         <div id="header">
             <a href="{% url 'summary_app:index' %}"><b id="page_name">Reading term {{ term.id }}</b></a>
-            <br>
+            <div id="nav_section">
+                {% if prev or next %}
+                {% if prev %}
+                    <a id="prev" class="nav" href="{% url 'summary_app:read' prev.id %}"><button>Prev: {{ prev.name }}</button></a>
+                {% endif %}
+                {% if next %}
+                    <a id="next" class="nav" href="{% url 'summary_app:read' next.id %}"><button>Next: {{ next.name }}</button></a>
+                {% endif %}
+            {% endif %} 
+            </div>
         </div>
         
         <div id="content">
@@ -28,18 +37,8 @@
             <b>Term definition:</b>
             <br>
             <div class="prewrap">{{ term.definition|linebreaksbr|link_terms:term.id }}</div>
-            <br>
-
-            {% if prev or next %}
-                {% if prev %}
-                    <a href="{% url 'summary_app:read' prev.id %}"><button class="nav">Prev: {{ prev.name }}</button></a>
-                {% endif %}
-                {% if next %}
-                    <a href="{% url 'summary_app:read' next.id %}"><button class="nav">Next: {{ next.name }}</button></a>
-                {% endif %}
-                <br><br>
-            {% endif %} 
-
+        </div>
+        <div id="footer">
             <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
             <a href="{% url 'summary_app:edit' term.id %}"><button>Edit</button></a>
             <a href="{% url 'summary_app:delete_term' term.id %}" onclick="return confirm('Are you sure you want to delete this term?')"><button>Delete</button></a>

@@ -13,18 +13,10 @@
         <link rel="stylesheet" href="{% static 'katex/katex.min.css' %}">
         <script src="{% static 'katex/katex.min.js' %}"></script>
         <script src="{% static 'katex/contrib/auto-render.min.js' %}"></script>
-
-        <!-- popup -->
-        <script src="{% static 'js/popup.js' %}" defer></script>
     </head>
     <body>
         <div id="header">
             <a href="{% url 'summary_app:index' %}"><b id="page_name">Test page</b></a>
-
-            <div class="popup_container">
-                <div class="clickable_element"><b>K</b></div>
-                <div id="popup_menu" class="popup_menu"><ul></ul></div>
-            </div>
         </div>
 
         <div id="content">
@@ -53,8 +45,8 @@
                     {% endif %}
                 </ul>
             </div>
-            <br>
-            
+        </div>
+        <div id="footer">
             <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
         </div>
     </body>

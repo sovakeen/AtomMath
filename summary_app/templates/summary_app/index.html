@@ -50,13 +50,15 @@
                 {% endfor %}
                 </ul>
             {% else %}
-                <p>No terms yet.</p>
+                <span>No terms yet.</span>
             {% endif %}
-            
+        </div>
+        <div id="footer">
             <a href="{% url 'summary_app:add' %}"><button>Add term</button></a>
             <a href="{% url 'summary_app:delete_all' %}" onclick="return confirm('Are you sure you want to delete ALL terms? This action cannot be undone.')"><button>Delete all</button></a>
             <a href="{% url 'summary_app:send_backup' %}"><button>Send backup</button></a>
-            <a href="{% url 'summary_app:test' %}"><button>Test</button></a>
+            <a href="{% url 'summary_app:test' %}"><button><i>Test</i></button></a>
+            <a href="{% url 'summary_app:prepopulate' %}"><button><i>Prepopulate</i></button></a>
         </div>
     </body>
     <script>

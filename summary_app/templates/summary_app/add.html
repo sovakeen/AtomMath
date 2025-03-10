@@ -64,12 +64,14 @@
                 <div id="preview">
                     <text>Term definition preview:</text>
                     <br>
-                    <span class="pre">{{ term.definition|linebreaksbr }}</span>
+                    <!-- pre or prewrap? -->
+                    <span id="preview_text" class="prewrap">{{ term.definition|linebreaksbr }}</span>
                 </div>
 
                 <input type="submit" value="Add term">
-            </form><br>
-
+            </form>
+        </div>
+        <div id="footer">
             <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
         </div>
     </body>
