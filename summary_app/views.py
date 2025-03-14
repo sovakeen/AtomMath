@@ -12,7 +12,7 @@ from .models import Term
 def index(request):
     term_list = Term.objects.order_by("id")
     shorts = {"Term": "Def", "Theorem": "The", "Article": "Art", "Undefined": "Und", "Example": "Exp"}
-    return render(request, "summary_app/index.html", { "terms_list": term_list, "shorts": shorts })
+    return render(request, "summary_app/index.html", { "term_list": term_list, "shorts": shorts })
 
 
 def add(request):
@@ -29,6 +29,11 @@ def read(request, term_id):
 def edit(request, term_id):
     term = get_object_or_404(Term, pk=term_id)
     return render(request, "summary_app/edit.html", { "term": term, "term_types": Term.Type.labels })
+
+
+def sequential(request):
+    term_list = Term.objects.order_by("id")
+    return render(request, "summary_app/sequential.html", { "term_list": term_list })
 
 
 def test(request, data={}):

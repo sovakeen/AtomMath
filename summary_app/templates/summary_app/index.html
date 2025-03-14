@@ -7,7 +7,7 @@
         <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <link rel="stylesheet" href="{% static 'css/templates/index.css' %}">
-        <link rel="stylesheet" href="{% static 'css/search.css' %}">
+        <!-- <link rel="stylesheet" href="{% static 'css/search.css' %}"> -->
 
         <!-- katex -->
         <link rel="stylesheet" href="{% static 'katex/katex.min.css' %}">
@@ -30,9 +30,9 @@
         </div> -->
 
         <div id="content">
-            {% if terms_list %}
+            {% if term_list %}
                 <ul>
-                {% for term in terms_list %}
+                {% for term in term_list %}
                     {% if term.type == 'Section' %}
                         <li class="section"><a class="section_name" href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}">{{ term.name }}</a></li>
                     {% else %}
@@ -59,6 +59,7 @@
             <a href="{% url 'summary_app:send_backup' %}"><button>Send backup</button></a>
             <a href="{% url 'summary_app:test' %}"><button><i>Test</i></button></a>
             <a href="{% url 'summary_app:prepopulate' %}"><button><i>Prepopulate</i></button></a>
+            <a href="{% url 'summary_app:sequential' %}"><button><i>Sequential</i></button></a>
         </div>
     </body>
     <script>
