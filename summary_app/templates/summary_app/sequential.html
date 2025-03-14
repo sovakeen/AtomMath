@@ -22,10 +22,15 @@
             {% if term_list %}
                 {% for term in term_list %}
                     {% if term.type == 'Section' %}
-                        <h2>{{ term.name }}</h2>
+                        <h2 style="margin-top: 0;">{{ term.name }}</h2>
                     {% else %}
-                        <u>{{ term.type }}</u><b class="pre">&#9{{ term.name }}</b><br>
-                        <div class="prewrap" style="margin-left: 32px">{{ term.definition }}</div><br><br>
+                    <div style="display: flex; align-items: top;">
+                        <u style="flex: 0 0 auto; font-family: 'Courier New', Courier, monospace;">{{ term.short_type }}</u>
+                        <div style="flex: 1; margin-left: 10px; border-left: 1px solid black; padding-left: 10px;"> 
+                            <b class="pre">{{ term.name }}</b><br>
+                            <div class="prewrap" style="">{{ term.definition }}</div>
+                        </div>
+                    </div><br>
                     {% endif %}
                 {% endfor %}
             {% else %}
