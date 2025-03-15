@@ -25,10 +25,10 @@
                         <h2 style="margin-top: 0;">{{ term.name }}</h2>
                     {% else %}
                     <div style="display: flex; align-items: top;">
-                        <u style="flex: 0 0 auto; font-family: 'Courier New', Courier, monospace;">{{ term.short_type }}</u>
+                        <u style="flex: 0 0 auto; font-family: 'Courier New', Courier, monospace; text-decoration-style: wavy;">{{ term.short_type_2L }}</u>
                         <div style="flex: 1; margin-left: 10px; border-left: 1px solid black; padding-left: 10px;"> 
                             <b class="pre">{{ term.name }}</b><br>
-                            <div class="prewrap" style="">{{ term.definition }}</div>
+                            <div>{{ term.definition }}</div>
                         </div>
                     </div><br>
                     {% endif %}

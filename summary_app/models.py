@@ -1,5 +1,7 @@
 from django.db import models
-from .static.type_shortcuts import Term_type_3L_shortcuts 
+from .static.type_shortcuts import Term_type_3L_shortcuts
+from .static.type_shortcuts import Term_type_2L_shortcuts 
+
 
 class Term(models.Model):
 	class Type(models.TextChoices):
@@ -14,6 +16,9 @@ class Term(models.Model):
 	name = models.CharField(max_length=100)
 	definition = models.CharField(max_length=1000)
 
-	def short_type(self):
+	def short_type_3L(self):
 		# return Term_type_3L_shortcuts.__members__[self.type]
 		return Term_type_3L_shortcuts.__dict__[self.type]
+	
+	def short_type_2L(self):
+		return Term_type_2L_shortcuts.__dict__[self.type]

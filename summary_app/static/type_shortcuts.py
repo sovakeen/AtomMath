@@ -7,3 +7,11 @@ class Term_type_3L_shortcuts():
     Article = "Art"
     Example = "Exm"
     Theorem = "The"
+
+
+class Term_type_2L_shortcuts():
+    Unspecified = "??"
+    Term = "Df"
+    Article = "Ar"
+    Example = "Ex"
+    Theorem = "Lw"
