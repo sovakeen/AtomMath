@@ -39,7 +39,7 @@ body {
 #content {
     margin-top: var(--header_height);
     margin-left: var(--offset);
-    /* margin-right: var(--offset); */
+    margin-right: var(--offset);
     margin-bottom: var(--header_height);
     padding-top: var(--offset);
     padding-bottom: var(--offset);
@@ -87,7 +87,6 @@ span .katex {
 .prewrap {
     white-space: pre-wrap;
 }
-
 
 /* br {
     line-height: 10px;

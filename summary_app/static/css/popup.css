@@ -3,7 +3,7 @@
     display: inline-block;
 }
 
-.clickable_element {
+.popup_mask {
     cursor: pointer;
     background-color: #f0f0f0;
     padding: 10px;
@@ -52,4 +52,14 @@
 .popup_menu li:hover {
     background-color: #f0f0f0;
     cursor: pointer;
+}
+
+.dev_popup {
+    margin-left: auto;
+    margin-right: 9px;
+}
+
+.dev_popup .popup_menu {
+    right: 0;
+    left: auto;
 }

@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <link rel="stylesheet" href="{% static 'css/templates/index.css' %}">
         <!-- <link rel="stylesheet" href="{% static 'css/search.css' %}"> -->
+        <link rel="stylesheet" href="{% static 'css/popup.css' %}">
 
         <!-- katex -->
         <link rel="stylesheet" href="{% static 'katex/katex.min.css' %}">
@@ -17,10 +18,32 @@
 
         <!-- search -->
         <!-- <script src="{% static 'js/search.js' %}"></script> -->
+
+        <!-- popup -->
+        <script src="{% static 'js/popup.js' %}" defer></script>
+
+        <!-- show ids checkbox -->
+        <script src="{% static 'js/show_ids_checkbox.js' %}" defer></script>
     </head>
     <body>
         <div id="header">
-            <a href="{% url 'summary_app:index' %}"><b id="page_name">Terms overview</b></a><br>
+            <a href="{% url 'summary_app:index' %}"><b id="page_name">Terms overview</b></a>
+
+            <div class="popup_container dev_popup">
+                <div class="popup_mask"><b>D</b></div>
+                <div class="popup_menu">
+                    <ul>
+                        <li><a href="{% url 'summary_app:test' %}"><i>Test</i></a></li>
+                        <li><a href="{% url 'summary_app:prepopulate' %}"><i>Prepopulate</i></a></li>
+                        <li><a href="{% url 'summary_app:sequential' %}"><i>Sequential</i></a></li>
+                        <li>
+                            <label>
+                                <i>Show IDs</i><input type="checkbox" id="show_ids_checkbox">
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <!-- search bar -->
@@ -34,7 +57,7 @@
                 <ul>
                 {% for term in term_list %}
                     {% if term.type == 'Section' %}
-                        <li class="section"><a class="section_name" href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}">{{ term.name }}</a></li>
+                        <li class="section"><a href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}">{{ term.name }}</a></li>
                     {% else %}
                         <li>
                             <!-- <u>
@@ -45,7 +68,7 @@
                                 {% endfor %}
                             </u>
                             <text> </text> -->
-                        <a href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}">{{ term.name }}</a></li>
+                        <a href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}"><span class="id">{{ term.id }} </span>{{ term.name }}</a></li>
                     {% endif %}
                 {% endfor %}
                 </ul>
@@ -57,9 +80,6 @@
             <a href="{% url 'summary_app:add' %}"><button>Add term</button></a>
             <a href="{% url 'summary_app:delete_all' %}" onclick="return confirm('Are you sure you want to delete ALL terms? This action cannot be undone.')"><button>Delete all</button></a>
             <a href="{% url 'summary_app:send_backup' %}"><button>Send backup</button></a>
-            <a href="{% url 'summary_app:test' %}"><button><i>Test</i></button></a>
-            <a href="{% url 'summary_app:prepopulate' %}"><button><i>Prepopulate</i></button></a>
-            <a href="{% url 'summary_app:sequential' %}"><button><i>Sequential</i></button></a>
         </div>
     </body>
     <script>

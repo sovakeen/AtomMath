@@ -21,16 +21,16 @@
         <!-- definition render preview -->
         <script src="{% static 'js/preview.js' %}" defer></script>
 
-        <!-- katex popup -->
-        <script src="{% static 'js/katex_popup.js' %}" defer></script>
+        <!-- popup -->
+        <script src="{% static 'js/popup.js' %}" defer></script>
     </head>
     <body>
         <div id="header">
             <a href="{% url 'summary_app:index' %}"><b id="page_name">Editing term {{ term.id }}</b></a>
             
-            <div class="popup_container">
-                <div class="clickable_element"><b>K</b></div>
-                <div id="katex_popup" class="popup_menu"><ul></ul></div>
+            <div class="popup_container katex_popup">
+                <div class="popup_mask"><b>K</b></div>
+                <div class="popup_menu"><ul></ul></div>
             </div>
         </div>
 
