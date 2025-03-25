@@ -39,7 +39,7 @@ body {
 #content {
     margin-top: var(--header_height);
     margin-left: var(--offset);
-    margin-right: var(--offset);
+    /* margin-right: var(--offset); */
     margin-bottom: var(--header_height);
     padding-top: var(--offset);
     padding-bottom: var(--offset);
@@ -74,6 +74,10 @@ body {
 a {
     color: black;
     text-decoration: none;
+}
+
+li a {
+    display: block;
 }
 
 span .katex {

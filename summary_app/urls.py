@@ -10,7 +10,8 @@ urlpatterns = [
     path("add/", views.add, name="add"),
     path("<int:term_id>/", views.read, name="read"),
     path("<int:term_id>/edit/", views.edit, name="edit"),
-    path("seq/", views.sequential, name="sequential"),
+    path("sequential/", views.sequential, name="sequential"),
+    path("backup_form/", views.backup_form, name="backup_form"),
 
     path("add_term/", views.add_term, name="add_term"),
     path("delete_all/", views.delete_all, name="delete_all"),

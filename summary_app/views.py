@@ -40,6 +40,10 @@ def test(request, data={}):
     return render(request, "summary_app/test.html", { "result": data })
 
 
+def backup_form(request):
+    return render(request, "summary_app/backup_form.html")
+
+
 #   Functions listed below are not actually views representing pages but request processors
 
 
@@ -91,8 +95,8 @@ def execute_raw_sql(request):
 
 def send_backup(request):
     email = EmailMessage(
-        "Django data backup",
-        "Sending data backup for " + str(datetime.now()),
+        request.POST['mail_topic'],
+        "Sending data backup for " + str(datetime.now()) + ". Provided text comment:\n" + request.POST['mail_text'],
         "from@example.com",
         ["rabykin2005@gmail.com"],
         []
