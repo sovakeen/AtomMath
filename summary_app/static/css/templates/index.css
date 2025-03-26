@@ -39,3 +39,16 @@ text {
     display: inline;
 }
 
+/* for swapping terms elements */
+.move-up, .move-down {
+    /* margin-left: 5px; */
+    margin: 0;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    padding: 2px 6px;
+}
+
+.move-up:hover, .move-down:hover {
+    background: #e0e0e0;
+}

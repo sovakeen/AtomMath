@@ -76,7 +76,7 @@ a {
     text-decoration: none;
 }
 
-li a {
+div.popup_menu ul li a {
     display: block;
 }
 

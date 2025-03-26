@@ -13,6 +13,8 @@ urlpatterns = [
     path("sequential/", views.sequential, name="sequential"),
     path("backup_form/", views.backup_form, name="backup_form"),
 
+    path('swap-terms/', views.swap_terms, name='swap_terms'),
+
     path("add_term/", views.add_term, name="add_term"),
     path("delete_all/", views.delete_all, name="delete_all"),
     path("delete_term/<int:term_id>/", views.delete_term, name="delete_term"),

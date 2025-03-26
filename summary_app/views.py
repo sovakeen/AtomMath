@@ -118,3 +118,34 @@ def prepopulate(request):
                 type=row['type']
             )
     return redirect("summary_app:index")
+
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import Term  # Assuming your model is named Term
+
+@csrf_exempt
+def swap_terms(request):
+    if request.method == 'POST':
+        import json
+        data = json.loads(request.body)
+        id1, id2 = data['id1'], data['id2']
+        # id1, id2 = request.POST['id1'], request.POST['id2']
+
+        try:
+            term1 = Term.objects.get(id=id1)
+            term2 = Term.objects.get(id=id2)
+
+            # Swap IDs
+            temp_id = term1.id
+            term1.id = term2.id
+            term2.id = temp_id
+
+            # Save changes
+            term1.save()
+            term2.save()
+
+            return JsonResponse({'status': 'success'})
+        except Term.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Term not found'}, status=404)
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
