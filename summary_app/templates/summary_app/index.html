@@ -15,7 +15,7 @@
         <script src="{% static 'katex/katex.min.js' %}"></script>
         <script src="{% static 'katex/contrib/auto-render.min.js' %}"></script>
         <script src="{% static 'js/render_katex.js' %}" defer></script>
-
+        
         <!-- search -->
         <!-- <script src="{% static 'js/search.js' %}"></script> -->
 
@@ -24,6 +24,12 @@
 
         <!-- show ids checkbox -->
         <script src="{% static 'js/show_ids_checkbox.js' %}" defer></script>
+
+        <!-- show arrows checkbox -->
+        <script src="{% static 'js/show_arrows_checkbox.js' %}" defer></script>
+
+        <!-- terms swap functionality -->
+        <script src="{% static 'js/terms_swap.js' %}" defer></script>
     </head>
     <body>
         <div id="header">
@@ -36,6 +42,11 @@
                         <li><a href="{% url 'summary_app:test' %}"><i>Test</i></a></li>
                         <li><a href="{% url 'summary_app:prepopulate' %}"><i>Prepopulate</i></a></li>
                         <li><a href="{% url 'summary_app:sequential' %}"><i>Sequential</i></a></li>
+                        <li>
+                            <label>
+                                <i>Show swap arrows </i><input type="checkbox" id="show_arrows_checkbox" unchecked>
+                            </label>
+                        </li>
                         <li>
                             <label>
                                 <i>Show IDs </i><input type="checkbox" id="show_ids_checkbox" checked>
@@ -59,7 +70,7 @@
                     {% if term.type == 'Section' %}
                         <li class="section" data-id="{{ term.id }}">
                             <button class="move-up" onclick="moveTerm('{{ term.id }}', 'up')">↑</button><button class="move-down" onclick="moveTerm('{{ term.id }}', 'down')">↓</button>
-                            <a href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}">{{ term.name }}</a>
+                            <a href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}"><span class="id">{{ term.id }} </span>{{ term.name }}</a>
                         </li>
                     {% else %}
                         <li data-id="{{ term.id }}">
@@ -80,48 +91,6 @@
         </div>
     </body>
     <script>
-        async function moveTerm(id, direction) {
-            const termList = Array.from(document.querySelectorAll('#term-list li'));
-            const currentItem = termList.find(li => li.getAttribute('data-id') === id);
-            const currentIndex = termList.indexOf(currentItem);
-
-            let targetIndex;
-            if (direction === 'up' && currentIndex > 0) {
-                targetIndex = currentIndex - 1;
-            } else if (direction === 'down' && currentIndex < termList.length - 1) {
-                targetIndex = currentIndex + 1;
-            } else {
-                return; // No swap possible
-            }
-
-            const targetItem = termList[targetIndex];
-            const targetId = targetItem.getAttribute('data-id');
-
-            // Send swap request to backend
-            await swapTerms(id, targetId);
-
-            // Swap IDs in UI
-            const tempId = currentItem.querySelector('.id').textContent;
-            currentItem.querySelector('.id').textContent = targetItem.querySelector('.id').textContent;
-            targetItem.querySelector('.id').textContent = tempId;
-        }
-
-        async function swapTerms(id1, id2) {
-            try {
-                const response = await fetch('/summary_app/swap-terms/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': '{{ csrf_token }}'
-                    },
-                    body: JSON.stringify({ id1: id1, id2: id2 })
-                });
-                if (!response.ok) throw new Error('Swap failed');
-                console.log('Terms swapped successfully');
-            } catch (error) {
-                console.error('Error swapping terms:', error);
-                alert('Failed to swap terms. Please try again.');
-            }
-        }
+        
     </script>
 </html>

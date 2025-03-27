@@ -10,4 +10,5 @@ function toggleIDs() {
     });
 };
 
+toggleIDs()
 document.getElementById("show_ids_checkbox").addEventListener('change', toggleIDs);

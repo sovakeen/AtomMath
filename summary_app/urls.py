@@ -13,13 +13,12 @@ urlpatterns = [
     path("sequential/", views.sequential, name="sequential"),
     path("backup_form/", views.backup_form, name="backup_form"),
 
-    path('swap-terms/', views.swap_terms, name='swap_terms'),
-
     path("add_term/", views.add_term, name="add_term"),
     path("delete_all/", views.delete_all, name="delete_all"),
     path("delete_term/<int:term_id>/", views.delete_term, name="delete_term"),
     path("modify_term/<int:term_id>/", views.modify_term, name="modify_term"),
     path("execute_raw_sql/", views.execute_raw_sql, name="execute_raw_sql"),
     path("send_backup/", views.send_backup, name="send_backup"),
-    path("prepopulate/", views.prepopulate, name="prepopulate")
+    path("prepopulate/", views.prepopulate, name="prepopulate"),
+    path('swap_terms/', views.swap_terms, name='swap_terms'),
 ]
