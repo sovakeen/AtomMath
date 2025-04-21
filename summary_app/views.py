@@ -90,7 +90,7 @@ def delete_term(request, term_id):
 def execute_raw_sql(request):
     sql_query = request.POST['sql_query']
     res = Term.objects.raw(sql_query)
-    return render(request, "summary_app/test.html", { "result": res })
+    return render(request, "summary_app/test.html", { "result": res, "res_dict": res.__dict__, "item_dict": res[0].__dict__ }) # add/rem "item_dict" makes diff
     # return test(request, res)
     # return redirect("summary_app:test")   # why use redirect?
 

@@ -26,7 +26,7 @@
 
                 <label for="sql_field">Raw sql:</label>
                 <br>
-                <textarea id="sql_field" class="input name" name="sql_query" wrap="off" placeholder="Enter sql query">select id, name from summary_app_term</textarea>
+                <textarea id="sql_field" class="input name" name="sql_query" wrap="off" placeholder="Enter sql query">select id, name, app from django_migrations</textarea>
                 <br><br>
                 <input type="submit" value="Execute">
             </form>
@@ -36,11 +36,25 @@
                 <br>
                 <b>{{ result }}</b>
                 <br><br>
+                <b>Execution result properties:</b>
+                <ul style="margin: 0;">
+                    {% for key, value in res_dict.items %}
+                        <li>{{ key }}: {{ value }}</li>
+                    {% endfor %}
+                </ul>
+                <br>
+                <b>Result' element properties:</b>
+                <ul style="margin: 0;">
+                    {% for key, value in item_dict.items %}
+                        <li>{{ key }}: {{ value }}</li>
+                    {% endfor %}
+                </ul>
+                <br>
                 <b>x for x in result:</b>
                 <ul style="margin: 0;">
                     {% if result %}
                         {% for x in result %}
-                            <li><b>{{ x.name }}</b></li>
+                            <li><b>{{ x }}</b></li>
                         {% endfor %}
                     {% endif %}
                 </ul>
