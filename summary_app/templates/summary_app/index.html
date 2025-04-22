@@ -6,8 +6,7 @@
         <!-- CSS -->
         <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
-        <link rel="stylesheet" href="{% static 'css/templates/index.css' %}">
-        <!-- <link rel="stylesheet" href="{% static 'css/search.css' %}"> -->
+        <link rel="stylesheet" href="{% static 'css/for_templates/index.css' %}">
         <link rel="stylesheet" href="{% static 'css/popup.css' %}">
 
         <!-- katex -->
@@ -15,21 +14,16 @@
         <script src="{% static 'katex/katex.min.js' %}"></script>
         <script src="{% static 'katex/contrib/auto-render.min.js' %}"></script>
         <script src="{% static 'js/render_katex.js' %}" defer></script>
-        
-        <!-- search -->
-        <!-- <script src="{% static 'js/search.js' %}"></script> -->
-
         <!-- popup -->
         <script src="{% static 'js/popup.js' %}" defer></script>
-
         <!-- show ids checkbox -->
         <script src="{% static 'js/show_ids_checkbox.js' %}" defer></script>
-
         <!-- show arrows checkbox -->
         <script src="{% static 'js/show_arrows_checkbox.js' %}" defer></script>
-
         <!-- terms swap functionality -->
         <script src="{% static 'js/terms_swap.js' %}" defer></script>
+        <!-- to show filepicker for import -->
+        <script src="{% static 'js/filepicker_for_import.js' %}" defer></script>
     </head>
     <body>
         <div id="header">
@@ -42,6 +36,16 @@
                         <li><a href="{% url 'summary_app:test' %}"><i>Test</i></a></li>
                         <li><a href="{% url 'summary_app:prepopulate' %}"><i>Prepopulate</i></a></li>
                         <li><a href="{% url 'summary_app:sequential' %}"><i>Sequential</i></a></li>
+                        <li><a href="{% url 'summary_app:export_terms' %}"><i>Export</i></a></li>
+                        <li>
+                            <form action="{% url 'summary_app:import_terms' %}" id="import-form" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <!-- Hidden file input -->
+                                <input type="file" id="json-file-input" name="json_file" style="display: none;" accept=".json">
+                                <!-- Button to trigger file picker -->
+                                <i onclick="triggerFilePicker()">Import JSON</i>
+                            </form>
+                        </li>
                         <li>
                             <label>
                                 <i>Show swap arrows </i><input type="checkbox" id="show_arrows_checkbox" unchecked>
@@ -49,19 +53,13 @@
                         </li>
                         <li>
                             <label>
-                                <i>Show IDs </i><input type="checkbox" id="show_ids_checkbox" checked>
+                                <i>Show IDs </i><input type="checkbox" id="show_ids_checkbox" unchecked>
                             </label>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-
-        <!-- search bar -->
-        <!-- <div id="search_container">
-            <input type="text" id="search_input" placeholder="Search terms...">
-            <div id="search_results" class="search-popup"></div>
-        </div> -->
 
         <div id="content">
             {% if term_list %}
@@ -87,7 +85,7 @@
         <div id="footer">
             <a href="{% url 'summary_app:add' %}"><button>Add term</button></a>
             <a href="{% url 'summary_app:delete_all' %}" onclick="return confirm('Are you sure you want to delete ALL terms? This action cannot be undone.')"><button>Delete all</button></a>
-            <a href="{% url 'summary_app:backup_form' %}"><button>Send backup</button></a>
+            <a href="{% url 'summary_app:backup' %}"><button>Send backup</button></a>
         </div>
     </body>
     <script>

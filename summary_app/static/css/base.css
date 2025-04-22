@@ -76,10 +76,6 @@ a {
     text-decoration: none;
 }
 
-div.popup_menu ul li a {
-    display: block;
-}
-
 span .katex {
     font-size: medium;
 }

@@ -11,7 +11,9 @@ urlpatterns = [
     path("<int:term_id>/", views.read, name="read"),
     path("<int:term_id>/edit/", views.edit, name="edit"),
     path("sequential/", views.sequential, name="sequential"),
-    path("backup_form/", views.backup_form, name="backup_form"),
+    path("backup/", views.backup, name="backup"),
+
+    # urls below are for processing functions, not for actual views
 
     path("add_term/", views.add_term, name="add_term"),
     path("delete_all/", views.delete_all, name="delete_all"),
@@ -21,4 +23,6 @@ urlpatterns = [
     path("send_backup/", views.send_backup, name="send_backup"),
     path("prepopulate/", views.prepopulate, name="prepopulate"),
     path('swap_terms/', views.swap_terms, name='swap_terms'),
+    path('export_terms/', views.export_terms, name='export_terms'),
+    path('import_terms/', views.import_terms, name='import_terms'),
 ]

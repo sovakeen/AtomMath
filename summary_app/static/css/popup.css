@@ -51,7 +51,7 @@
 
 .popup_menu li:hover {
     background-color: #f0f0f0;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .dev_popup {

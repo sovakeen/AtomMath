@@ -2,11 +2,15 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.core.mail import EmailMessage
+from django.views.decorators.csrf import csrf_exempt
+from django.core import serializers
+from django.contrib import messages
+from django.conf import settings
 from datetime import datetime
 from pathlib import Path
 import csv
-from django.views.decorators.csrf import csrf_exempt
 import json
+import os
 
 from .models import Term
 
@@ -42,11 +46,11 @@ def test(request, data={}):
     return render(request, "summary_app/test.html", { "result": data })
 
 
-def backup_form(request):
-    return render(request, "summary_app/backup_form.html")
+def backup(request):
+    return render(request, "summary_app/backup.html")
 
 
-#   Functions listed below are not actually views representing pages but request processors
+# Functions listed below are not actually views representing pages but request processors
 
 
 def add_term(request):
@@ -88,7 +92,7 @@ def delete_term(request, term_id):
 
 # doesn't redirect, so url remains .../exec_sql/
 def execute_raw_sql(request):
-    sql_query = request.POST['sql_query']
+    sql_query = request.POST["sql_query"]
     res = Term.objects.raw(sql_query)
     return render(request, "summary_app/test.html", { "result": res, "res_dict": res.__dict__, "item_dict": res[0].__dict__ }) # add/rem "item_dict" makes diff
     # return test(request, res)
@@ -97,8 +101,8 @@ def execute_raw_sql(request):
 
 def send_backup(request):
     email = EmailMessage(
-        request.POST['mail_topic'],
-        "Sending data backup for " + str(datetime.now()) + ". Provided text comment:\n" + request.POST['mail_text'],
+        request.POST["mail_topic"],
+        "Sending data backup for " + str(datetime.now()) + ". Provided text comment:\n" + request.POST["mail_text"],
         "from@example.com",
         ["rabykin2005@gmail.com"],
         []
@@ -108,9 +112,10 @@ def send_backup(request):
     return redirect("summary_app:index")
 
 
+# to deprecate or to replace csv with json
 def prepopulate(request):
     Term.objects.all().delete()
-    with open(Path(__file__).parent.parent.absolute().joinpath('sample_data.csv'), 'r', encoding='utf-8') as file:
+    with open(Path(__file__).parent.parent.absolute().joinpath('example_data.csv'), 'r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
         for row in reader:
             Term.objects.create(
@@ -137,3 +142,30 @@ def swap_terms(request):
         except Term.DoesNotExist:
             return JsonResponse({'status': 'error', 'message': 'Term not found'}, status=404)
     return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+
+
+def export_terms(request):
+    try:
+        # Serialize Term objects to JSON
+        terms = Term.objects.all()
+        serialized_data = serializers.serialize('json', terms, indent=2)
+        # Create HTTP response with JSON content
+        response = HttpResponse(serialized_data, content_type='application/json')
+        # Trigger download with a default filename
+        response['Content-Disposition'] = 'attachment; filename=\"terms.json\"'
+        return response
+    except Exception as e:
+        messages.error(request, f'Error exporting: {str(e)}')
+        return redirect('summary_app:index')
+
+
+def import_terms(request):
+    json_file = request.FILES['json_file']
+    try:
+        data = json_file.read().decode('utf-8')
+        for obj in serializers.deserialize('json', data):
+            obj.save()
+        messages.success(request, 'Successfully imported Terms')
+        return redirect('summary_app:index')
+    except Exception as e:
+        messages.error(request, f'Error importing: {str(e)}')
