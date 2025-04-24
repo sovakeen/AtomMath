@@ -1,0 +1,18 @@
+{
+    "3L_shortcuts": {
+        "Unspecified": "Unk",
+        "Term": "Def",
+        "Article": "Art",
+        "Example": "Exm",
+        "Theorem": "The",
+        "Section": "Sec"
+    },
+    "2L_shortcuts": {
+        "Unspecified": "??",
+        "Term": "Df",
+        "Article": "Ar",
+        "Example": "Ex",
+        "Theorem": "Lw",
+        "Section": "Sc"
+    }
+}

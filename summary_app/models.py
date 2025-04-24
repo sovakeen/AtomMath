@@ -1,21 +1,16 @@
 from django.db import models
-# from enum import Enum
+import os
+import json
 
 
-class Term_type_3L_shortcuts():
-		Unspecified = "Unk"
-		Term = "Def"
-		Article = "Art"
-		Example = "Exm"
-		Theorem = "The"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+SHORTCUTS_FILE = os.path.join(BASE_DIR, 'static', 'type_shortcuts', 'type_shortcuts.json')
 
-class Term_type_2L_shortcuts():
-	Unspecified = "??"
-	Term = "Df"
-	Article = "Ar"
-	Example = "Ex"
-	Theorem = "Lw"
+with open(SHORTCUTS_FILE, 'r') as f:
+    SHORTCUTS = json.load(f)
 
+TERM_TYPE_3L_SHORTCUTS = SHORTCUTS['3L_shortcuts']
+TERM_TYPE_2L_SHORTCUTS = SHORTCUTS['2L_shortcuts']
 
 class Term(models.Model):
 	class Type(models.TextChoices):
@@ -31,8 +26,7 @@ class Term(models.Model):
 	definition = models.CharField(max_length=1000)
 
 	def short_type_3L(self):
-		# return Term_type_3L_shortcuts.__members__[self.type]
-		return Term_type_3L_shortcuts.__dict__[self.type]
-	
+		return TERM_TYPE_3L_SHORTCUTS.get(self.type, "Unk")
+
 	def short_type_2L(self):
-		return Term_type_2L_shortcuts.__dict__[self.type]
+		return TERM_TYPE_2L_SHORTCUTS.get(self.type, "??")
