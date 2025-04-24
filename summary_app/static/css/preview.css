@@ -1,4 +1,4 @@
-#preview {
+#preview_div {
     width: 49%;
     display: none;
     vertical-align: top;
@@ -11,6 +11,7 @@
 
     resize: both; 
     overflow: scroll;
+    border: 1px solid gray;
 }
 
 /* When preview is shown */
@@ -18,6 +19,6 @@
     width: 50%;
 }
 
-.show_preview #preview {
+.show_preview #preview_div {
     display: inline-block;
 }

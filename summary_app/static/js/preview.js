@@ -1,9 +1,9 @@
 // Function to render math in preview
 function renderPreview() {
     const definitionText = document.getElementById("definition_field").value;
-    const previewSpan = document.querySelector("#preview span");
+    const previewSpan = document.querySelector("#preview_div span");
     previewSpan.innerHTML = definitionText.replace(/\n/g, '<br>');
-    renderMathInElement(document.getElementById("preview"), {
+    renderMathInElement(document.getElementById("preview_div"), {
         delimiters: [
             {left: '$$', right: '$$', display: true},
             {left: '$', right: '$', display: false}
