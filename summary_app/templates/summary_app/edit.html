@@ -58,19 +58,20 @@
                 </select><br>
                 <br>
 
-                <!-- "definition" field -->
-                <div id="definition_div">
-                    <label for="definition_field">Term definition (<input id="preview_checkbox" type="checkbox" unchecked>show preview):</label>
-                    <br>
-                    <textarea id="definition_field" class="pre custom_keys" name="term_definition" wrap="off" placeholder="Enter term definition">{{ term.definition }}</textarea>
-                    <br>
-                </div>
-                
-                <!-- preview -->
-                <div id="preview_div">
-                    <text>Term definition preview:</text>
-                    <br>
-                    <span id="preview_text" class="pre">{{ term.definition|linebreaksbr }}</span>
+                <div id="flex_container">
+                    <!-- "definition" field -->
+                    <div id="definition_div">
+                        <label for="definition_field">Term definition (<input id="preview_checkbox" type="checkbox" unchecked>show preview):</label>
+                        <br>
+                        <textarea id="definition_field" class="pre custom_keys" name="term_definition" wrap="off" placeholder="Enter term definition">{{ term.definition }}</textarea>
+                    </div>
+                    
+                    <!-- preview -->
+                    <div id="preview_div">
+                        <text>Term definition preview:</text>
+                        <br>
+                        <span id="preview_text" class="pre">{{ term.definition|linebreaksbr }}</span>
+                    </div>
                 </div>
                 <br>
 

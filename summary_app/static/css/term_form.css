@@ -28,6 +28,7 @@ textarea:focus {
 
 #definition_div textarea {
     width: 100%;
+    max-width: 100%;
     height: 270px; 
     box-sizing: border-box;
     display: block;
