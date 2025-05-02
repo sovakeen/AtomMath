@@ -35,11 +35,6 @@
             <form action="{% url 'summary_app:modify_term' term.id %}" method="post">
                 {% csrf_token %}
 
-                <!-- "id" field -->
-                <label for="id_field">Term id:</label><br>
-                <textarea id="id_field" class="id" name="term_id" wrap="off" placeholder="Enter term id">{{ term.id }}</textarea><br>
-                <br>
-
                 <!-- "name" field -->
                 <label for="name_field">Term name:</label><br>
                 <textarea id="name_field" class="pre name" name="term_name" wrap="off" placeholder="Enter term name">{{ term.name }}</textarea><br>

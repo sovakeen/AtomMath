@@ -8,16 +8,11 @@ textarea:focus {
     outline: none;
 }
 
-.id {
-    width: 100px; 
-    height: 32px;
-    /* 32 for 1 line + scrollbar */
-}
-
 .name {
     width: 500px; 
     height: 47px;
-    /* 47 for 2 lines + scrollbar */
+    /* 47 for 2 lines + scrollbar
+    32 for 1 line + scrollbar */
 }
 
 #definition_div {

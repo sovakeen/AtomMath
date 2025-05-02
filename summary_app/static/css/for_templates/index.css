@@ -54,3 +54,7 @@ text {
 .show {
     display: inline;
 }
+
+#import_json_form {
+    display: inline;
+}

@@ -34,18 +34,6 @@
                 <div class="popup_menu">
                     <ul>
                         <li><a href="{% url 'summary_app:test' %}"><i>Test</i></a></li>
-                        <li><a href="{% url 'summary_app:prepopulate' %}"><i>Prepopulate</i></a></li>
-                        <li><a href="{% url 'summary_app:sequential' %}"><i>Sequential</i></a></li>
-                        <li><a href="{% url 'summary_app:export_terms' %}"><i>Export</i></a></li>
-                        <li>
-                            <form action="{% url 'summary_app:import_terms' %}" id="import-form" method="post" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                <!-- Hidden file input -->
-                                <input type="file" id="json-file-input" name="json_file" style="display: none;" accept=".json">
-                                <!-- Button to trigger file picker -->
-                                <i onclick="triggerFilePicker()">Import JSON</i>
-                            </form>
-                        </li>
                         <li>
                             <label>
                                 <i>Show swap arrows </i><input type="checkbox" id="show_arrows_checkbox" unchecked>
@@ -84,6 +72,16 @@
         </div>
         <div id="footer">
             <a href="{% url 'summary_app:add' %}"><button>Add term</button></a>
+            <a href="{% url 'summary_app:prepopulate' %}"><button>Prepopulate</button></a>
+            <a href="{% url 'summary_app:sequential' %}"><button>Sequential</button></a>
+            <a href="{% url 'summary_app:export_terms' %}"><button>Export</button></a>
+            <form id="import_json_form" action="{% url 'summary_app:import_terms' %}" id="import-form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- Hidden file input -->
+                <input type="file" id="json-file-input" name="json_file" style="display: none;" accept=".json">
+                <!-- Button to trigger file picker -->
+                <button onclick="triggerFilePicker()">Import JSON</button>
+            </form>
             <a href="{% url 'summary_app:delete_all' %}" onclick="return confirm('Are you sure you want to delete ALL terms? This action cannot be undone.')"><button>Delete all</button></a>
             <a href="{% url 'summary_app:backup' %}"><button>Send backup</button></a>
         </div>
