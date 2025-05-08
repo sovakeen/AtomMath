@@ -3,12 +3,10 @@
     <head>
         {% load static %}
         {% load summary_filters %}
-        
         <!-- CSS -->
         <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <link rel="stylesheet" href="{% static 'css/for_templates/read.css' %}">
-
         <!-- katex -->
         <link rel="stylesheet" href="{% static 'katex/katex.min.css' %}">
         <script src="{% static 'katex/katex.min.js' %}"></script>
@@ -17,14 +15,14 @@
     </head>
     <body>
         <div id="header">
-            <a href="{% url 'summary_app:index' %}"><b id="page_name">Reading term {{ term.id }}</b></a>
-            <div id="nav_section">
+            <a href="{% url 'summary_app:index' %}"><b id="page-name">Reading term {{ term.id }}</b></a>
+            <div id="nav-section">
                 {% if prev or next %}
                 {% if prev %}
-                    <a id="prev" class="nav" href="{% url 'summary_app:read' prev.id %}"><button>Prev: {{ prev.name }}</button></a>
+                    <a id="prev" class="nav" href="{% url 'summary_app:read' prev.id %}"><button>← {{ prev.name }}</button></a>
                 {% endif %}
                 {% if next %}
-                    <a id="next" class="nav" href="{% url 'summary_app:read' next.id %}"><button>Next: {{ next.name }}</button></a>
+                    <a id="next" class="nav" href="{% url 'summary_app:read' next.id %}"><button>{{ next.name }} →</button></a>
                 {% endif %}
             {% endif %} 
             </div>
@@ -38,6 +36,7 @@
             <br>
             <div class="prewrap">{{ term.definition|linebreaksbr|link_terms:term.id }}</div>
         </div>
+        
         <div id="footer">
             <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
             <a href="{% url 'summary_app:edit' term.id %}"><button>Edit</button></a>

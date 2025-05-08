@@ -10,7 +10,6 @@ from datetime import datetime
 from pathlib import Path
 import csv
 import json
-import os
 
 from .models import Term
 
@@ -50,7 +49,7 @@ def backup(request):
     return render(request, "summary_app/backup.html")
 
 
-# Functions listed below are not actually views representing pages but request processors
+# functions listed below are not actually views representing pages but request processors
 
 
 def add_term(request):
@@ -96,7 +95,7 @@ def execute_raw_sql(request):
     res = Term.objects.raw(sql_query)
     return render(request, "summary_app/test.html", { "result": res, "res_dict": res.__dict__, "item_dict": res[0].__dict__ }) # add/rem "item_dict" makes diff
     # return test(request, res)
-    # return redirect("summary_app:test")   # why use redirect?
+    # return redirect("summary_app:test")
 
 
 def send_backup(request):
@@ -146,12 +145,12 @@ def swap_terms(request):
 
 def export_terms(request):
     try:
-        # Serialize Term objects to JSON
+        # serialize Term objects to json
         terms = Term.objects.all()
         serialized_data = serializers.serialize('json', terms, indent=2)
-        # Create HTTP response with JSON content
+        # create http response with json content
         response = HttpResponse(serialized_data, content_type='application/json')
-        # Trigger download with a default filename
+        # trigger download with a default filename
         response['Content-Disposition'] = 'attachment; filename=\"terms.json\"'
         return response
     except Exception as e:

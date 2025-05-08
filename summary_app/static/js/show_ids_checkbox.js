@@ -1,15 +1,15 @@
 function toggleIDs() {
-    const ids = document.querySelectorAll('.id');
+    const ids = document.querySelectorAll('.term-id');
 
-    // Ensure containers exist
+    // ensure containers exist
     if (!ids.length) return;
 
-    // Initialize each popup container
+    // initialize each popup container
     ids.forEach(id => {
         id.classList.toggle('show');
     });
 };
 
-// Initial toggle
+// initial toggle
 // toggleIDs()
-document.getElementById("show_ids_checkbox").addEventListener('change', toggleIDs);
+document.getElementById("show-ids-checkbox").addEventListener('change', toggleIDs);

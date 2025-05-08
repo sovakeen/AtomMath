@@ -1,1 +1,0 @@
-this dir is likely to be turned into directory storing user preferences like katex constructions for fast insertin, already existing type shortcuts, etc. 

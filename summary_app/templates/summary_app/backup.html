@@ -2,13 +2,11 @@
 <html>
     <head>
         {% load static %}
-        
         <!-- CSS -->
         <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <link rel="stylesheet" href="{% static 'css/term_form.css' %}">
         <link rel="stylesheet" href="{% static 'css/popup.css' %}">
-        
         <!-- katex -->
         <link rel="stylesheet" href="{% static 'katex/katex.min.css' %}">
         <script src="{% static 'katex/katex.min.js' %}"></script>
@@ -16,30 +14,30 @@
     </head>
     <body>
         <div id="header">
-            <a href="{% url 'summary_app:index' %}"><b id="page_name">Test page</b></a>
+            <a href="{% url 'summary_app:index' %}"><b id="page-name">Test page</b></a>
         </div>
 
         <div id="content">
             <!-- raw sql execution form -->
             <form action="{% url 'summary_app:send_backup' %}" method="post">
                 {% csrf_token %}
-
-                <label for="mail_topic_field">Mail topic:</label>
+                <label for="mail-topic-field">Mail topic:</label>
                 <br>
-                <textarea id="mail_topic_field" class="input name" name="mail_topic" wrap="off">Django summary_app data backup</textarea>
+                <textarea id="mail-topic-field" class="input name" name="mail_topic" wrap="off">Django summary_app data backup</textarea>
                 <br><br>
-                <label for="mail_text_field">Mail text:</label>
+                <label for="mail-text-field">Mail text:</label>
                 <br>
-                <textarea id="mail_text_field" class="input name" name="mail_text" wrap="off"></textarea>
+                <textarea id="mail-text-field" class="input name" name="mail_text" wrap="off"></textarea>
                 <br><br>
                 <input type="submit" value="Send backup">
             </form>
         </div>
+
         <div id="footer">
             <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
         </div>
     </body>
     <script>
-        // document.getElementById("b").onclick = function () { alert(`Now: ${history.state}`); };
+        
     </script>
 </html>

@@ -2,48 +2,38 @@
 <html>
     <head>
         {% load static %}
-        
         <!-- CSS -->
         <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <link rel="stylesheet" href="{% static 'css/for_templates/index.css' %}">
         <link rel="stylesheet" href="{% static 'css/popup.css' %}">
-
         <!-- katex -->
         <link rel="stylesheet" href="{% static 'katex/katex.min.css' %}">
         <script src="{% static 'katex/katex.min.js' %}"></script>
         <script src="{% static 'katex/contrib/auto-render.min.js' %}"></script>
         <script src="{% static 'js/render_katex.js' %}" defer></script>
-        <!-- popup -->
+        <!-- popups -->
         <script src="{% static 'js/popup.js' %}" defer></script>
-        <!-- show ids checkbox -->
+        <!-- "show ids" checkbox -->
         <script src="{% static 'js/show_ids_checkbox.js' %}" defer></script>
-        <!-- show arrows checkbox -->
+        <!-- "show arrows" checkbox -->
         <script src="{% static 'js/show_arrows_checkbox.js' %}" defer></script>
-        <!-- terms swap functionality -->
+        <!-- terms swap -->
         <script src="{% static 'js/terms_swap.js' %}" defer></script>
-        <!-- to show filepicker for import -->
+        <!-- filepicker for import -->
         <script src="{% static 'js/filepicker_for_import.js' %}" defer></script>
     </head>
     <body>
         <div id="header">
-            <a href="{% url 'summary_app:index' %}"><b id="page_name">Terms overview</b></a>
+            <a href="{% url 'summary_app:index' %}"><b id="page-name">Terms overview</b></a>
 
-            <div class="popup_container dev_popup">
-                <div class="popup_mask"><b>D</b></div>
-                <div class="popup_menu">
+            <div class="popup-container dev-popup">
+                <div class="popup-mask"><b>D</b></div>
+                <div class="popup-menu">
                     <ul>
                         <li><a href="{% url 'summary_app:test' %}"><i>Test</i></a></li>
-                        <li>
-                            <label>
-                                <i>Show swap arrows </i><input type="checkbox" id="show_arrows_checkbox" unchecked>
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <i>Show IDs </i><input type="checkbox" id="show_ids_checkbox" unchecked>
-                            </label>
-                        </li>
+                        <li><label><i>Show swap arrows </i><input type="checkbox" id="show-arrows-checkbox" unchecked></label></li>
+                        <li><label><i>Show IDs </i><input type="checkbox" id="show-ids-checkbox" unchecked></label></li>
                     </ul>
                 </div>
             </div>
@@ -51,17 +41,17 @@
 
         <div id="content">
             {% if term_list %}
-                <ul id="term-list">
+                <ul id="terms-list">
                 {% for term in term_list %}
                     {% if term.type == 'Section' %}
                         <li class="section" data-id="{{ term.id }}">
                             <button class="move-up" onclick="moveTerm('{{ term.id }}', 'up')">↑</button><button class="move-down" onclick="moveTerm('{{ term.id }}', 'down')">↓</button>
-                            <a href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}"><span class="id">{{ term.id }} </span>{{ term.name }}</a>
+                            <a href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}"><span class="term-id">{{ term.id }} </span>{{ term.name }}</a>
                         </li>
                     {% else %}
                         <li data-id="{{ term.id }}">
                             <button class="move-up" onclick="moveTerm('{{ term.id }}', 'up')">↑</button><button class="move-down" onclick="moveTerm('{{ term.id }}', 'down')">↓</button>
-                            <a href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}"><span class="id">{{ term.id }} </span>{{ term.name }}</a>
+                            <a href="{% url 'summary_app:read' term.id %}" data-id="{{ term.id }}"><span class="term-id">{{ term.id }} </span>{{ term.name }}</a>
                         </li>
                     {% endif %}
                 {% endfor %}
@@ -70,17 +60,18 @@
                 <span>No terms yet.</span>
             {% endif %}
         </div>
+        
         <div id="footer">
             <a href="{% url 'summary_app:add' %}"><button>Add term</button></a>
             <a href="{% url 'summary_app:prepopulate' %}"><button>Prepopulate</button></a>
             <a href="{% url 'summary_app:sequential' %}"><button>Sequential</button></a>
             <a href="{% url 'summary_app:export_terms' %}"><button>Export</button></a>
-            <form id="import_json_form" action="{% url 'summary_app:import_terms' %}" id="import-form" method="post" enctype="multipart/form-data">
+            <form id="json-import-form" action="{% url 'summary_app:import_terms' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <!-- Hidden file input -->
-                <input type="file" id="json-file-input" name="json_file" style="display: none;" accept=".json">
-                <!-- Button to trigger file picker -->
-                <button onclick="triggerFilePicker()">Import JSON</button>
+                <!-- hidden file input -->
+                <input id="json-file-input" type="file" name="json_file" accept=".json">
+                <!-- button to trigger file picker -->
+                <button type="button" onclick="triggerFilePicker()">Import JSON</button>
             </form>
             <a href="{% url 'summary_app:delete_all' %}" onclick="return confirm('Are you sure you want to delete ALL terms? This action cannot be undone.')"><button>Delete all</button></a>
             <a href="{% url 'summary_app:backup' %}"><button>Send backup</button></a>

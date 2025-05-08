@@ -1,17 +1,17 @@
-#flex_container {
+#flex-container {
     display: flex;
     width: 99%;
 }
 
-#preview_div {
+#preview-div {
     display: none;
     vertical-align: top;
 }
 
-#preview_text {
+#preview-text {
+    display: inline-block;
     width: 100%;
     height: 265px;
-    display: inline-block;
     resize: vertical; 
     overflow: scroll;
     margin: 2px;
@@ -19,21 +19,21 @@
     padding: 2px;
 }
 
-/* When preview is shown */
-.show_preview #definition_div textarea {
-    width: 700px;
-}
-
-.show_preview #definition_div {
-    min-width: 20%;
+/* when preview is shown */
+.show-preview #definition-div {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     width: fit-content;
+    min-width: 20%;
 }
 
-.show_preview #preview_div {
-    min-width: 20%;
+.show-preview #definition-div textarea {
+    width: 700px;
+}
+
+.show-preview #preview-div {
     display: inline-block;
     flex: 1;
+    min-width: 20%;
 }
