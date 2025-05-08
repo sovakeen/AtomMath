@@ -1,49 +1,38 @@
-:root {
-    --small_offset: 9px;
-    --offset: 18px;
-    --header_offset: 27px;
-}
-
-ul {
+#terms-list {
+    list-style-type: none;
     margin: 0;
     padding: 0;
-    list-style-type: none;
 }
 
-ul li:first-child {
+#terms-list li:first-child {
     margin-top: 0;
 }
 
-ul li:last-child {
+#terms-list li:last-child {
     margin-bottom: 0;
 }
 
-text {
-    white-space: pre;
+.term-id {
+    display: none;
 }
 
 .section {
-    margin: var(--small_offset) 0 var(--small_offset) 0;
     display: inline-block;
+    margin: var(--small-offset) 0;
     border: 1px solid;
     border-left: 0px;
     /* border-top: 0px; */
-    padding: var(--small_offset) var(--small_offset) var(--small_offset) 0;
+    padding: var(--small-offset) var(--small-offset) var(--small-offset) 0;
 }
 
-.id {
-    display: none;
-}
-
-
-/* for elements for swapping terms */
+/* swapping terms buttons */
 .move-up, .move-down {
     display: none;
-    /* margin-left: 5px; */
-    margin: 0;
     cursor: pointer;
-    border: 1px solid #ccc;
     background: #f9f9f9;
+    margin: 0;
+    /* margin-left: 5px; */
+    border: 1px solid #ccc;
     padding: 2px 6px;
 }
 
@@ -51,10 +40,14 @@ text {
     background: #e0e0e0;
 }
 
-.show {
+#json-import-form {
     display: inline;
 }
 
-#import_json_form {
+#json-file-input {
+    display: none;
+}
+
+.show {
     display: inline;
 }

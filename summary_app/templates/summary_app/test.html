@@ -2,13 +2,11 @@
 <html>
     <head>
         {% load static %}
-        
         <!-- CSS -->
         <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <link rel="stylesheet" href="{% static 'css/term_form.css' %}">
         <link rel="stylesheet" href="{% static 'css/popup.css' %}">
-        
         <!-- katex -->
         <link rel="stylesheet" href="{% static 'katex/katex.min.css' %}">
         <script src="{% static 'katex/katex.min.js' %}"></script>
@@ -23,10 +21,9 @@
             <!-- raw sql execution form -->
             <form action="{% url 'summary_app:execute_raw_sql' %}" method="post">
                 {% csrf_token %}
-
-                <label for="sql_field">Raw sql:</label>
+                <label for="sql-field">Raw sql:</label>
                 <br>
-                <textarea id="sql_field" class="input name" name="sql_query" wrap="off" placeholder="Enter sql query">select id, name, app from django_migrations</textarea>
+                <textarea id="sql-field" class="input name" name="sql_query" wrap="off" placeholder="Enter sql query">select id, name, app from django_migrations</textarea>
                 <br><br>
                 <input type="submit" value="Execute">
             </form>

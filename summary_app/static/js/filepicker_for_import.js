@@ -1,12 +1,10 @@
-function triggerFilePicker() {
-    // Trigger the hidden file input's click event
-    const fileInput = document.getElementById('json-file-input');
-    fileInput.click();
+document.getElementById('json-file-input').addEventListener('change', function() {
+    const fileInput = this;
+    if (fileInput.files.length > 0) {
+        document.getElementById('json-import-form').submit();
+    }
+});
 
-    // Auto-submit the form when a file is selected
-    fileInput.addEventListener('change', function() {
-        if (fileInput.files.length > 0) {
-            document.getElementById('import-form').submit();
-        }
-    });
+function triggerFilePicker() {
+    document.getElementById('json-file-input').click();
 }

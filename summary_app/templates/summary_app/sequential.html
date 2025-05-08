@@ -2,11 +2,10 @@
 <html>
     <head>
         {% load static %}
-        
         <!-- CSS -->
         <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
-
+        <link rel="stylesheet" href="{% static 'css/for_templates/sequential.css' %}">
         <!-- katex -->
         <link rel="stylesheet" href="{% static 'katex/katex.min.css' %}">
         <script src="{% static 'katex/katex.min.js' %}"></script>
@@ -15,28 +14,31 @@
     </head>
     <body>
         <div id="header">
-            <a href="{% url 'summary_app:index' %}"><b id="page_name">Sequential reading</b></a><br>
+            <a href="{% url 'summary_app:index' %}"><b id="page-name">Sequential reading</b></a><br>
         </div>
 
         <div id="content">
             {% if term_list %}
                 {% for term in term_list %}
                     {% if term.type == 'Section' %}
-                        <h2 style="margin-top: 0;">{{ term.name }}</h2>
+                        <h2>{{ term.name }}</h2>
                     {% else %}
-                    <div style="display: flex; align-items: top;">
-                        <u style="flex: 0 0 auto; font-family: 'Courier New', Courier, monospace; text-decoration-style: wavy;">{{ term.short_type_2L }}</u>
-                        <div style="flex: 1; margin-left: 10px; border-left: 1px solid black; padding-left: 10px;"> 
-                            <b class="pre">{{ term.name }}</b><br>
-                            <div>{{ term.definition }}</div>
+                        <div class="term-div">
+                            <u class="term-type">{{ term.short_type_2L }}</u>
+                            <div class="term-text"> 
+                                <b class="pre">{{ term.name }}</b>
+                                <br>
+                                <div>{{ term.definition }}</div>
+                            </div>
                         </div>
-                    </div><br>
+                        <br>
                     {% endif %}
                 {% endfor %}
             {% else %}
                 <span>No terms yet.</span>
             {% endif %}
         </div>
+
         <div id="footer">
             <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
         </div>

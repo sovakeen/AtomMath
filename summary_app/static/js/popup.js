@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const popupContainers = document.querySelectorAll('.popup_container');
+    const popupContainers = document.querySelectorAll('.popup-container');
 
-    // Ensure containers exist
+    // ensure containers exist
     if (!popupContainers.length) return;
 
-    // Function to load and populate katex constructions for a specific menu
+    // function to load and populate katex constructions for a specific menu
     async function loadKatexConstructions(popupMenu) {
         const popupList = popupMenu.querySelector('ul');
         if (!popupList) return;
@@ -42,25 +42,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Initialize each popup container
+    // initialize each popup container
     popupContainers.forEach(container => {
-        const popupMask = container.querySelector('.popup_mask');
-        const popupMenu = container.querySelector('.popup_menu');
+        const popupMask = container.querySelector('.popup-mask');
+        const popupMenu = container.querySelector('.popup-menu');
         
         if (!popupMask || !popupMenu) return;
 
-        // Toggle popup visibility
+        // toggle popup visibility
         popupMask.addEventListener('click', (event) => {
             event.stopPropagation();
             
-            if (!popupMenu.classList.contains('show') && container.classList.contains('katex_popup')) {
+            if (!popupMenu.classList.contains('show') && container.classList.contains('katex-popup')) {
                 loadKatexConstructions(popupMenu);
             }
             
             popupMenu.classList.toggle('show');
         });
 
-        // Close popup when clicking outside
+        // close popup when clicking outside
         document.addEventListener('click', (event) => {
             if (!popupMenu.contains(event.target) && 
                 event.target !== popupMask) {

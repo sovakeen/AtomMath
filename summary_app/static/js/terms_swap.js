@@ -22,7 +22,7 @@ async function swapTerms(id1, id2) {
 }
 
 async function moveTerm(id, direction) {
-    const termList = Array.from(document.querySelectorAll('#term-list li'));
+    const termList = Array.from(document.querySelectorAll('#terms-list li'));
     const currentItem = termList.find(li => li.getAttribute('data-id') === id);
     const currentIndex = termList.indexOf(currentItem);
 
@@ -40,7 +40,7 @@ async function moveTerm(id, direction) {
 
     const success = await swapTerms(id, targetId);
     if (success) {
-        // Clone the elements to ensure a fresh DOM update
+        // clone the elements to ensure a fresh DOM update
         const currentClone = currentItem.cloneNode(true);
         const targetClone = targetItem.cloneNode(true);
 
@@ -48,15 +48,15 @@ async function moveTerm(id, direction) {
         const currentDataId = currentClone.getAttribute('data-id');
         const targetDataId = targetClone.getAttribute('data-id');
         
-        // Update data-id attributes
+        // update data-id attributes
         currentClone.setAttribute('data-id', targetDataId);
         targetClone.setAttribute('data-id', currentDataId);
 
-        // Update displayed IDs
-        currentClone.querySelector('.id').innerHTML = `${targetId} `
-        targetClone.querySelector('.id').innerHTML = `${id} `
+        // update displayed IDs
+        currentClone.querySelector('.term-id').innerHTML = `${targetId} `
+        targetClone.querySelector('.term-id').innerHTML = `${id} `
 
-        // Update onclick attributes of child buttons
+        // update onclick attributes of child buttons
         const currentUpButton = currentClone.querySelector('.move-up');
         const currentDownButton = currentClone.querySelector('.move-down');
         const targetUpButton = targetClone.querySelector('.move-up');
@@ -75,7 +75,7 @@ async function moveTerm(id, direction) {
             targetDownButton.setAttribute('onclick', `moveTerm('${currentDataId}', 'down')`);
         }
 
-        // Replace original elements with clones in swapped positions
+        // replace original elements with clones in swapped positions
         const parent = currentItem.parentNode;
         if (currentIndex < targetIndex) {
             parent.replaceChild(targetClone, currentItem);

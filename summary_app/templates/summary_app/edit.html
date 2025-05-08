@@ -2,14 +2,12 @@
 <html>
     <head>
         {% load static %}
-        
         <!-- CSS -->
         <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <link rel="stylesheet" href="{% static 'css/preview.css' %}">
         <link rel="stylesheet" href="{% static 'css/term_form.css' %}">
         <link rel="stylesheet" href="{% static 'css/popup.css' %}">
-
         <!-- katex -->
         <link rel="stylesheet" href="{% static 'katex/katex.min.css' %}">
         <script src="{% static 'katex/katex.min.js' %}"></script>
@@ -18,31 +16,28 @@
         <script src="{% static 'js/custom_keys.js' %}" defer></script>
         <!-- definition render preview -->
         <script src="{% static 'js/preview.js' %}" defer></script>
-        <!-- popup -->
+        <!-- popups -->
         <script src="{% static 'js/popup.js' %}" defer></script>
     </head>
     <body>
         <div id="header">
-            <a href="{% url 'summary_app:index' %}"><b id="page_name">Editing term {{ term.id }}</b></a>
+            <a href="{% url 'summary_app:index' %}"><b id="page-name">Editing term {{ term.id }}</b></a>
             
-            <div class="popup_container katex_popup">
-                <div class="popup_mask"><b>K</b></div>
-                <div class="popup_menu"><ul></ul></div>
+            <div class="popup-container katex-popup">
+                <div class="popup-mask"><b>K</b></div>
+                <div class="popup-menu"><ul></ul></div>
             </div>
         </div>
 
         <div id="content">
             <form action="{% url 'summary_app:modify_term' term.id %}" method="post">
                 {% csrf_token %}
-
-                <!-- "name" field -->
-                <label for="name_field">Term name:</label><br>
-                <textarea id="name_field" class="pre name" name="term_name" wrap="off" placeholder="Enter term name">{{ term.name }}</textarea><br>
+                <label for="name-field">Term name:</label><br>
+                <textarea id="name-field" class="pre" name="term_name" wrap="off" placeholder="Enter term name">{{ term.name }}</textarea><br>
                 <br>
 
-                <!-- "type" selection control -->
-                <label for="type_field">Term type:</label><br>
-                <select id="type_field" name="term_type">
+                <label for="type-field">Term type:</label><br>
+                <select id="type-field" name="term_type">
                     {% for type in term_types %}
                         {% if term.type == type %}
                             <option value="{{ type }}" selected>{{ type }}</option>
@@ -50,30 +45,28 @@
                             <option value="{{ type }}">{{ type }}</option>
                         {% endif %}
                     {% endfor %}
-                </select><br>
-                <br>
+                </select>
+                <br><br>
 
-                <div id="flex_container">
-                    <!-- "definition" field -->
-                    <div id="definition_div">
-                        <label for="definition_field">Term definition (<input id="preview_checkbox" type="checkbox" unchecked>show preview):</label>
+                <div id="flex-container">
+                    <div id="definition-div">
+                        <label for="definition-field">Term definition (<input id="preview-checkbox" type="checkbox" unchecked>show preview):</label>
                         <br>
-                        <textarea id="definition_field" class="pre custom_keys" name="term_definition" wrap="off" placeholder="Enter term definition">{{ term.definition }}</textarea>
+                        <textarea id="definition-field" class="pre custom_keys" name="term_definition" wrap="off" placeholder="Enter term definition">{{ term.definition }}</textarea>
                     </div>
                     
-                    <!-- preview -->
-                    <div id="preview_div">
+                    <div id="preview-div">
                         <text>Term definition preview:</text>
                         <br>
-                        <span id="preview_text" class="pre">{{ term.definition|linebreaksbr }}</span>
+                        <span id="preview-text" class="pre">{{ term.definition|linebreaksbr }}</span>
                     </div>
                 </div>
                 <br>
 
                 <input type="submit" value="Save changes">
-                <!-- onclick="return confirm('Are you sure you want to save changes?')" -->
             </form>
         </div>
+
         <div id="footer">
             <a href="{% url 'summary_app:index' %}"><button>Home</button></a>
             <a href="{% url 'summary_app:read' term.id %}"><button>Cancel</button></a>
